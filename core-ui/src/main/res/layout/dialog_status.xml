@@ -6,11 +6,11 @@
     <data>
         <variable
             name="vm"
-            type="com.edutionLearning.core_ui.view.dialog.StatusDialogViewModel" />
+            type="com.edutionAdminLearning.core_ui.view.dialog.StatusDialogViewModel" />
 
         <variable
             name="controller"
-            type="com.edutionLearning.core_ui.view.dialog.StatusDialog" />
+            type="com.edutionAdminLearning.core_ui.view.dialog.StatusDialog" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.edutionLearning.network'
+    namespace 'com.edutionAdminLearning.network'
     compileSdk 33
 
     defaultConfig {

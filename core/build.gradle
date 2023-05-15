@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.edutionLearning.core'
+    namespace 'com.edutionAdminLearning.core'
     compileSdk 33
 
     defaultConfig {
@@ -62,10 +62,6 @@ dependencies {
     // Debugging
     debugImplementation "com.mocklets:pluto:$pluto"
     releaseImplementation "com.mocklets:pluto-no-op:$pluto"
-
-    // firebase
-    implementation platform("com.google.firebase:$firebase_bom")
-    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Stetho
     implementation("com.facebook.stetho:stetho-okhttp3:$stetho")
