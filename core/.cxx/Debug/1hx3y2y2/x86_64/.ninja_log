@@ -1,0 +1,9 @@
+# ninja log v5
+0	213	1681545010	CMakeFiles/core.dir/core.cpp.o	593a36d03df3a1aa
+214	293	1681545010	/Users/shanigupta/AndroidStudioProjects/EdutionLearningUsersApp/core/build/intermediates/cxx/Debug/1hx3y2y2/obj/x86_64/libcore.so	80e6b807efab31a7
+0	10	0	clean	d0dbd7426f4dfe02
+3	293	1681919823	CMakeFiles/core.dir/core.cpp.o	593a36d03df3a1aa
+293	402	1681919823	/Users/shanigupta/AndroidStudioProjects/EdutionLearningUsersApp/core/build/intermediates/cxx/Debug/1hx3y2y2/obj/x86_64/libcore.so	80e6b807efab31a7
+1	14	0	clean	d0dbd7426f4dfe02
+3	277	1681945405	CMakeFiles/core.dir/core.cpp.o	593a36d03df3a1aa
+278	445	1681945406	/Users/shanigupta/AndroidStudioProjects/EdutionLearningUsersApp/core/build/intermediates/cxx/Debug/1hx3y2y2/obj/x86_64/libcore.so	80e6b807efab31a7

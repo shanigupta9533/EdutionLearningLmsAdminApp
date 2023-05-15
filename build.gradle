@@ -1,0 +1,85 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        // Retrofit network
+        retrofit = '2.9.0'
+        retrofitRxJava = '2.7.1'
+
+        // Rx
+        rxAndroid = '1.2.1'
+
+        // kotlin version
+        kotlin_version = '1.7.20'
+
+        androidXNavigation = '2.5.0'
+
+        //firebase bom
+        firebase_bom = "firebase-bom:32.0.0"
+
+        //lottie compose
+        lottie_version = '5.2.0'
+
+        // hilt
+        hilt_version = '2.44'
+        hilt_version_dagg = '2.44'
+        hilt_compiler_version = "1.0.0"
+
+        // Facebook Shimmer
+        facebookShimmer = "0.5.0"
+
+        //gms_serves
+        gms_server = "4.3.15"
+
+        // Google Material Design
+        googleMaterial = '1.6.1'
+
+        // Glide
+        glide = '4.12.0'
+        glideCompose = "1.0.0-alpha.1"
+
+        // Commons
+        commons_io = "20030203.000550"
+        commons_net = "20030805.205232"
+        commons_codec = "1.13"
+
+        // OKHTTP
+        okHttp = '4.9.0'
+
+        // Pluto
+        pluto = '1.1.1'
+
+        //lifecycle aware
+        androidXLifecycleRuntimeKtx = "2.5.1"
+        androidXSecurityCrypto = "1.1.0-alpha03"
+        androidXLifecycle = '2.2.0'
+        androidXViewModelKtx = '2.4.1'
+
+        // stetho
+        stetho = "1.5.1"
+
+    }
+
+    dependencies {
+        classpath 'com.chaitanyapramod.gradle:findbugs-android:1.0'
+        classpath 'com.android.tools.build:gradle:7.2.2'//7.0.3
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$androidXNavigation"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath "com.google.gms:google-services:$gms_server"
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.13.4'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5'
+    }
+
+}
+
+plugins {
+    id 'com.android.application' version '7.3.1' apply false
+    id 'com.android.library' version '7.3.1' apply false
+    id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

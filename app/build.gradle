@@ -1,0 +1,161 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
+    id 'dagger.hilt.android.plugin'
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+    id 'com.google.firebase.crashlytics'
+}
+
+android {
+    namespace 'com.edutionLearning.edutionlearningapp'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.edutionLearning.edutionlearningapp"
+        minSdk 23
+        targetSdk 33
+        versionCode 2
+        versionName "1.001"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        qaRelease {
+            storeFile file("../docs/qa-keystore/testing-keystore")
+            storePassword "Pw@Test@123"
+            keyAlias "Test Key"
+            keyPassword "Pw@Test@123"
+        }
+        edutionRelease {
+            storeFile file("../physicswala.jks")
+            storePassword "physicswala"
+            keyAlias "physicswala"
+            keyPassword "physicswala"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (project.hasProperty('buildFor')) {
+                def buildFor = project.property('buildFor')
+                println "Build for release $buildFor"
+                buildConfigField "String", "BUILD_FOR", "\"$buildFor\""
+            } else {
+                buildConfigField "String", "BUILD_FOR", '"RELEASE"'
+            }
+            signingConfig signingConfigs.edutionRelease
+        }
+
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (project.hasProperty('buildFor')) {
+                def buildFor = project.property('buildFor')
+                println "Build for debug $buildFor"
+                buildConfigField "String", "BUILD_FOR", "\"$buildFor\""
+            } else {
+                buildConfigField "String", "BUILD_FOR", '"DEBUG"'
+            }
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+}
+
+dependencies {
+
+    implementation project(path: ':core')
+    implementation project(path: ':core-ui')
+    implementation project(path: ':network')
+
+    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.5'
+
+    implementation "com.google.dagger:hilt-android:$hilt_version_dagg"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_compiler_version"
+    implementation 'com.razorpay:checkout:1.6.30'
+
+    //loading shimmer
+    implementation "com.facebook.shimmer:shimmer:$facebookShimmer"
+
+    // Glide
+    kapt "com.github.bumptech.glide:compiler:$glide"
+    implementation "com.github.bumptech.glide:glide:$glide"
+    implementation "com.github.bumptech.glide:annotations:$glide"
+    implementation("com.github.bumptech.glide:okhttp3-integration:$glide")
+
+    // Google material
+    implementation "com.google.android.material:material:$googleMaterial"
+
+    // Debugging
+    debugImplementation "com.mocklets:pluto:$pluto"
+    releaseImplementation "com.mocklets:pluto-no-op:$pluto"
+
+    // Retrofit network
+    implementation("com.squareup.retrofit2:retrofit:$retrofit") {
+        exclude module: 'com.squareup.okio'
+        exclude module: 'okhttp'
+    }
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit") {
+        exclude module: 'okhttp'
+    }
+
+    // Lottie
+    implementation "com.airbnb.android:lottie:$lottie_version"
+
+    //hilt
+    implementation "androidx.hilt:hilt-work:1.0.0"
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+
+    // firebase
+    implementation platform("com.google.firebase:$firebase_bom")
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // one signal
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+
+    // crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    // scrolling indicator
+    implementation "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.2.4"
+
+    // ago timestamp
+    implementation 'com.github.curioustechizen.android-ago:library:1.4.0'
+
+    // joda time
+    implementation 'joda-time:joda-time:2.12.5'
+
+
+}

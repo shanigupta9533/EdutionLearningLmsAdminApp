@@ -1,0 +1,9 @@
+# ninja log v5
+1	302	1681545012	CMakeFiles/network.dir/network.cpp.o	2770916eb1c8d649
+303	380	1681545012	/Users/shanigupta/AndroidStudioProjects/EdutionLearningUsersApp/network/build/intermediates/cxx/Debug/6x6r5l6q/obj/x86_64/libnetwork.so	e807e00e45d6ae60
+0	14	0	clean	d0dbd7426f4dfe02
+2	245	1681919825	CMakeFiles/network.dir/network.cpp.o	2770916eb1c8d649
+245	323	1681919825	/Users/shanigupta/AndroidStudioProjects/EdutionLearningUsersApp/network/build/intermediates/cxx/Debug/6x6r5l6q/obj/x86_64/libnetwork.so	e807e00e45d6ae60
+0	9	0	clean	d0dbd7426f4dfe02
+1	207	1681945409	CMakeFiles/network.dir/network.cpp.o	2770916eb1c8d649
+207	342	1681945409	/Users/shanigupta/AndroidStudioProjects/EdutionLearningUsersApp/network/build/intermediates/cxx/Debug/6x6r5l6q/obj/x86_64/libnetwork.so	e807e00e45d6ae60

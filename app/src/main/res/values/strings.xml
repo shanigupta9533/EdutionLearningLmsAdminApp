@@ -1,0 +1,33 @@
+<resources>
+    <string name="title_activity_otp_validation">OtpValidationActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="something_went_wrong">Something went wrong, try again</string>
+    <string name="otp_submitted_successfully">OTP has been submitted to your number, please verify</string>
+    <string name="fill_otp_send_to_your_number">Fill OTP, which is send on your number!</string>
+    <string name="enter_mobile_number">Enter Mobile Number*</string>
+    <string name="share_text_for_query">%s (%s) Whose price is %s I want to know more about this course.</string>
+    <string name="mobile_number_is_not_valid">Mobile number is not valid, Try again</string>
+    <string name="puchased_this_course">Start Learning …</string>
+    <string name="price_details">Buy this course min at </string>
+    <string name="view_notes">View Notes</string>
+    <string name="lecture_code">Lecture Code</string>
+    <string name="ask_doubts">Ask Doubts</string>
+    <string name="home_work">Home Work</string>
+    <string name="premium_video_page">Buy %s Course in just Rs. %s</string>
+    <string name="starting_price">Starting Price at ₹ %s</string>
+    <string name="support">Support</string>
+    <string name="enquiry_about_course">Enquiry About Course</string>
+    <string name="chat_with_us">Chat With Us</string>
+    <string name="logout">Logout</string>
+    <string name="edution_learning_pvt_ltd">Edution Learning Pvt Ltd</string>
+    <string name="please_wait">please wait...</string>
+</resources>

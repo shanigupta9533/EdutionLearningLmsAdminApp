@@ -1,0 +1,85 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.edutionLearning.network'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", '"http://192.168.29.228:8000"'
+            buildConfigField "String", "ONE_SIGNAL_APP_ID", '"43ab056f-6069-4bf9-ba12-395b495dbb19"'
+        }
+
+        debug{
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", '"http://192.168.29.228:8000"'
+            buildConfigField "String", "ONE_SIGNAL_APP_ID", '"43ab056f-6069-4bf9-ba12-395b495dbb19"'
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation project(path: ':core')
+
+    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // Retrofit network
+    implementation("com.squareup.retrofit2:retrofit:$retrofit") {
+        exclude module: 'com.squareup.okio'
+        exclude module: 'okhttp'
+    }
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit") {
+        exclude module: 'okhttp'
+    }
+    // Retrofit RXJava
+    implementation "io.reactivex:rxandroid:$rxAndroid"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitRxJava"
+
+    implementation "com.google.dagger:hilt-android:$hilt_version_dagg"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_compiler_version"
+
+    /*OkHttp Client*/
+    implementation "commons-io:commons-io:$commons_io"
+    implementation "commons-net:commons-net:$commons_net"
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:$okHttp"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+
+}

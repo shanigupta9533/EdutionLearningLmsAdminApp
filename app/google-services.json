@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "893200215701",
+    "project_id": "edution-lms-app",
+    "storage_bucket": "edution-lms-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893200215701:android:0a88859645d314c65ff59c",
+        "android_client_info": {
+          "package_name": "com.edutionLearning.edutionlearningapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893200215701-2gbvjdjblaq5id1ipl98hcc42omn0esp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edutionLearning.edutionlearningapp",
+            "certificate_hash": "1c75fbebe4a6fb74fa3a1a3d1933789afa24d643"
+          }
+        },
+        {
+          "client_id": "893200215701-1igfd2olrb5ielpb7135g3kop5049a8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAivHbs3ox_6g88u2r0KB8T9NRwsK2Fs_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893200215701-1igfd2olrb5ielpb7135g3kop5049a8h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

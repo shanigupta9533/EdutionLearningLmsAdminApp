@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.edutionLearning.core_ui.view.dialog.StatusDialogViewModel" />
+
+        <variable
+            name="controller"
+            type="com.edutionLearning.core_ui.view.dialog.StatusDialog" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="@dimen/dp_16">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/dp_8"
+            android:text="@{vm.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title of the status" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{vm.message}"
+            app:layout_constraintEnd_toEndOf="@+id/title"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="Title of the status" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            app:layout_constraintEnd_toEndOf="@+id/message"
+            app:layout_constraintStart_toStartOf="@+id/message"
+            app:layout_constraintTop_toBottomOf="@+id/message"
+            android:textAllCaps="false"
+            android:onClick="@{()-> controller.onOkClick()}"
+            android:text="@string/ok"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

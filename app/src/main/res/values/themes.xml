@@ -1,0 +1,8 @@
+<resources>
+  <style name="Theme.EdutionLearningApp.NoActionBar" >
+  <item name="windowActionBar">false</item>
+  <item name="windowNoTitle">true</item>
+</style>
+  <style name="Theme.EdutionLearningApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+  <style name="Theme.EdutionLearningApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

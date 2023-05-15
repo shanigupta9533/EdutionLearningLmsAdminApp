@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <attr name="dotsColor" format="color" />
+    <attr name="selectedDotColor" format="color" />
+    <attr name="dotsStrokeColor" format="color" />
+    <attr name="dotsSize" format="dimension" />
+    <attr name="dotsWidthFactor" format="float" />
+    <attr name="dotsSpacing" format="dimension" />
+    <attr name="dotsCornerRadius" format="dimension" />
+    <attr name="dotsStrokeWidth" format="dimension" />
+    <attr name="stiffness" format="float" />
+    <attr name="dampingRatio" format="float" />
+    <attr name="progressMode" format="boolean" />
+    <attr name="dotsClickable" format="boolean" />
+
+    <declare-styleable name="DotsIndicator">
+        <attr name="dotsColor" />
+        <attr name="selectedDotColor" />
+        <attr name="dotsSize" />
+        <attr name="dotsWidthFactor" />
+        <attr name="dotsSpacing" />
+        <attr name="dotsCornerRadius" />
+        <attr name="progressMode" />
+        <attr name="dotsClickable" />
+        <attr name="dotsElevation" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="SpringDotsIndicator">
+        <attr name="dotsColor" />
+        <attr name="dotsSize" />
+        <attr name="dotsSpacing" />
+        <attr name="dotsCornerRadius" />
+        <attr name="dotsStrokeWidth" />
+        <attr name="dotsStrokeColor" />
+        <attr name="stiffness" />
+        <attr name="dampingRatio" />
+        <attr name="dotsClickable" />
+    </declare-styleable>
+
+    <declare-styleable name="WormDotsIndicator">
+        <attr name="dotsColor" />
+        <attr name="dotsSize" />
+        <attr name="dotsSpacing" />
+        <attr name="dotsCornerRadius" />
+        <attr name="dotsStrokeWidth" />
+        <attr name="dotsStrokeColor" />
+        <attr name="dotsClickable" />
+    </declare-styleable>
+
+    <declare-styleable name="RollingTextView">
+        <attr name="duration" format="reference|integer" />
+        <attr name="android:gravity" tools:ignore="ResourceName" />
+        <attr name="android:shadowColor" tools:ignore="ResourceName" />
+        <attr name="android:shadowDx" tools:ignore="ResourceName" />
+        <attr name="android:shadowDy" tools:ignore="ResourceName" />
+        <attr name="android:shadowRadius" tools:ignore="ResourceName" />
+        <attr name="android:text" tools:ignore="ResourceName" />
+        <attr name="android:textAppearance" tools:ignore="ResourceName" />
+        <attr name="android:textColor" tools:ignore="ResourceName" />
+        <attr name="android:textSize" tools:ignore="ResourceName" />
+        <attr name="android:textStyle" tools:ignore="ResourceName" />
+        <attr name="fontFamily" tools:ignore="ResourceName" />
+    </declare-styleable>
+
+    <declare-styleable name="FontTabLayout">
+        <attr name="defaultSelectedPosition" format="integer" />
+        <attr name="selectedTypeFace" format="reference" />
+        <attr name="normalTypeFace" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="OtpViewTheme">
+        <attr format="reference" name="otpViewStyle"/>
+    </declare-styleable>
+
+    <declare-styleable name="OtpView">
+        <attr format="integer" name="OtpItemCount"/>
+        <attr format="dimension" name="OtpItemWidth"/>
+        <attr format="dimension" name="OtpItemHeight"/>
+        <attr format="dimension" name="OtpItemRadius"/>
+        <attr format="dimension" name="OtpItemSpacing"/>
+        <attr format="dimension" name="OtpLineWidth"/>
+        <attr format="reference|color" name="OtpLineColor"/>
+        <attr format="enum" name="OtpViewType">
+            <enum name="rectangle" value="0"/>
+            <enum name="line" value="1"/>
+            <enum name="none" value="2"/>
+        </attr>
+        <attr name="android:cursorVisible"/>
+        <attr name="android:textAllCaps"/>
+        <attr format="dimension" name="OtpCursorWidth"/>
+        <attr format="reference|color" name="OtpCursorColor"/>
+        <attr name="android:itemBackground"/>
+        <attr format="boolean" name="OtpHideLineWhenFilled"/>
+        <attr format="boolean" name="OtpState_filled"/>
+        <attr format="boolean" name="OtpRtlTextDirection"/>
+        <attr format="string" name="OtpMaskingChar"/>
+    </declare-styleable>
+
+    <declare-styleable name="ReadMoreTextView">
+        <attr format="integer" name="readMoreMaxLine"/>
+        <attr format="string|reference" name="readMoreText"/>
+        <attr format="color|reference" name="readMoreColor"/>
+    </declare-styleable>
+
+</resources>
