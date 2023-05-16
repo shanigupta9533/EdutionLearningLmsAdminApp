@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EdutionLearningApp</string>
+    <string name="app_name">Edution Lms Admin</string>
     <string name="status_dialog_title_no_internet">No Internet !</string>
     <string name="status_dialog_message_no_internet">You phone has no internet connection, Please enable the internet.</string>
     <string name="status_dialog_title_failed">Failed !</string>

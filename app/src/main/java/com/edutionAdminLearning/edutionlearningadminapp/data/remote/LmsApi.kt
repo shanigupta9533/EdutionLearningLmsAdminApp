@@ -1,37 +1,51 @@
 package com.edutionAdminLearning.edutionlearningadminapp.data.remote
 
+import com.edutionAdminLearning.core.result.ApiResponse
+import com.edutionAdminLearning.edutionlearningadminapp.data.dto.CourseDetailDto
+import com.edutionAdminLearning.edutionlearningadminapp.data.dto.LoginSubmitDto
+import com.edutionAdminLearning.edutionlearningadminapp.data.dto.PurchaseDetailsDto
+import com.edutionAdminLearning.edutionlearningadminapp.data.dto.PurchaseSubmitDto
+import com.edutionAdminLearning.edutionlearningadminapp.data.dto.SignUpSubmitDto
+import com.edutionAdminLearning.edutionlearningadminapp.data.dto.UserDetailsResponseDto
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
+
 interface LmsApi {
 
-//    @POST("api/signup")
-//    suspend fun signupUser(
-//        @Body body: SignUpSubmitDto
-//    ): Response<ApiResponse<UserDetailsResponseDto>>
-//
-//    @POST("api/login")
-//    suspend fun loginUser(
-//        @Body body: LoginSubmitDto
-//    ): Response<ApiResponse<UserDetailsResponseDto>>
+    @POST("signup")
+    suspend fun signupUser(
+        @Body body: SignUpSubmitDto
+    ): Response<ApiResponse<UserDetailsResponseDto>>
 
-//    @FormUrlEncoded
-//    @POST("api/otp")
-//    suspend fun getOtp(
-//        @Field("mobile") mobile: String
-//    ): Response<ApiResponse<Unit>>
-//
-//    @POST("api/compareOtp")
-//    suspend fun submitOtpVerified(
-//        @Body otpVerifySubmitDto: OtpVerifySubmitDto
-//    ): Response<ApiResponse<UserDetailsResponseDto>>
-//
-//    @POST("api/changePassword")
-//    suspend fun changePassword(
-//        @Body changePasswordRequestDto: ChangePasswordRequestDto
-//    ): Response<ApiResponse<UserDetailsResponseDto>>
-//
-//    @GET("api/courseDetails")
-//    suspend fun allCourseDetails(
-//        @Query("keywords") keywords: String
-//    ): Response<ApiResponse<List<CourseDetailDto>>>
+    @POST("login")
+    suspend fun loginUser(
+        @Body body: LoginSubmitDto
+    ): Response<ApiResponse<UserDetailsResponseDto>>
+
+    @FormUrlEncoded
+    @GET("allCourses")
+    suspend fun getAllCoursesDetails(
+    ): Response<ApiResponse<List<CourseDetailDto>>>
+
+    @DELETE("courseDetails/{courseId}")
+    suspend fun deleteCourseDetails(
+        @Path("courseId") courseId: String,
+        ): Response<ApiResponse<Unit>>
+
+    @GET("purchaseDetails")
+    suspend fun getPurchaseDetails(
+    ): Response<ApiResponse<List<PurchaseDetailsDto>>>
+
+    @POST("purchaseDetails")
+    suspend fun purchaseInsert(
+        @Body purchaseSubmitDto: PurchaseSubmitDto
+    ): Response<ApiResponse<Unit>>
 //
 //    @GET("api/getBanner")
 //    suspend fun getBanners(
