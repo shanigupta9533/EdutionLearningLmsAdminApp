@@ -177,7 +177,7 @@ class CourseDetailsViewModel @Inject constructor(
     fun videoDetailsDelete(videoId: String) {
         startLoading()
         viewModelScope.launch {
-            courseDetailDeleteUseCase(videoId).onSuccess {
+            courseVideoDeleteUseCase(videoId).onSuccess {
                 stopLoading()
                 _respondSuccess.tryEmit(true)
             }.onFailure {
