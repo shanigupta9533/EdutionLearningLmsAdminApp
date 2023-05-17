@@ -8,12 +8,12 @@ import com.edutionAdminLearning.edutionlearningadminapp.data.remote.LmsEdutionDa
 import com.edutionAdminLearning.network.doman.UseCaseSuspend
 import javax.inject.Inject
 
-typealias GetPurchaseDetailsSubmitTimeLies = MyResult<Unit, CompleteApiError<Error>>
+typealias GetNotificationSubmitTimeLies = MyResult<Unit, CompleteApiError<Error>>
 
-class PurchaseDetailsSubmitUseCase @Inject constructor(
+class NotificationInsertUseCase @Inject constructor(
     private val lmsEdutionDataSource: LmsEdutionDataSource,
-) : UseCaseSuspend<PurchaseSubmitDto, GetPurchaseDetailsSubmitTimeLies> {
-    override suspend fun invoke(params: PurchaseSubmitDto): GetPurchaseDetailsSubmitTimeLies {
-        return lmsEdutionDataSource.getPurchaseSubmit(params)
+) : UseCaseSuspend<String, GetNotificationSubmitTimeLies> {
+    override suspend fun invoke(params: String): GetNotificationSubmitTimeLies {
+        return lmsEdutionDataSource.notificationInsert(params)
     }
 }

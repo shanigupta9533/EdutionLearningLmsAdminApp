@@ -96,6 +96,7 @@ class NetworkUtils(private val context: Context?) {
         return original.newBuilder()
             .removeHeader(NetworkHeaders.CONTENT_TYPE)
             .header(NetworkHeaders.CONTENT_TYPE, "application/json")
+            .header(NetworkHeaders.ACCEPT_TYPE, "application/json")
             .header(
                 "Authorization",
                 "Bearer $token"

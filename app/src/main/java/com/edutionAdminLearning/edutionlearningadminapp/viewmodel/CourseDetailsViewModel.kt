@@ -5,12 +5,18 @@ import com.edutionAdminLearning.core.result.getMessage
 import com.edutionAdminLearning.core.result.onFailure
 import com.edutionAdminLearning.core.result.onSuccess
 import com.edutionAdminLearning.core_ui.viewmodel.BaseViewModel
+import com.edutionAdminLearning.edutionlearningadminapp.data.dto.PurchaseSubmitDto
 import com.edutionAdminLearning.edutionlearningadminapp.data.model.CoursesDetailsData
+import com.edutionAdminLearning.edutionlearningadminapp.data.model.CoursesVideo
 import com.edutionAdminLearning.edutionlearningadminapp.data.model.PurchaseDetails
 import com.edutionAdminLearning.edutionlearningadminapp.data.usecase.CourseDetailDeleteUseCase
 import com.edutionAdminLearning.edutionlearningadminapp.data.usecase.CourseDetailUseCase
+import com.edutionAdminLearning.edutionlearningadminapp.data.usecase.GetVideoDetailsUseCase
 import com.edutionAdminLearning.edutionlearningadminapp.data.usecase.PurchaseDetailUseCase
+import com.edutionAdminLearning.edutionlearningadminapp.data.usecase.PurchaseDetailsDeleteUseCase
 import com.edutionAdminLearning.edutionlearningadminapp.data.usecase.PurchaseDetailsSubmitUseCase
+import com.edutionAdminLearning.edutionlearningadminapp.data.usecase.PurchaseDetailsUpdate
+import com.edutionAdminLearning.edutionlearningadminapp.data.usecase.PurchaseDetailsUpdateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,11 +30,18 @@ class CourseDetailsViewModel @Inject constructor(
     private val courseDetailUseCase: CourseDetailUseCase,
     private val courseDetailDeleteUseCase: CourseDetailDeleteUseCase,
     private val purchaseDetailUseCase: PurchaseDetailUseCase,
-    private val purchaseDetailsSubmitUseCase: PurchaseDetailsSubmitUseCase
+    private val purchaseDetailsSubmitUseCase: PurchaseDetailsSubmitUseCase,
+    private val purchaseDetailsUpdateUseCase: PurchaseDetailsUpdateUseCase,
+    private val purchaseDetailsDeleteUseCase: PurchaseDetailsDeleteUseCase,
+    private val videoDetailsUseCase: GetVideoDetailsUseCase,
+    private val courseVideoDeleteUseCase: CourseDetailDeleteUseCase
 ) : BaseViewModel() {
 
     private val _getAllCourses = MutableStateFlow<List<CoursesDetailsData>?>(null)
     val getAllCourses = _getAllCourses.asStateFlow()
+
+    private val _coursesVideoPlayer = MutableSharedFlow<List<CoursesVideo>>(extraBufferCapacity = 1)
+    val coursesVideoPlayer = _coursesVideoPlayer.asSharedFlow()
 
     private val _getAllPurchaseDetails = MutableSharedFlow<List<PurchaseDetails>?>(extraBufferCapacity = 1)
     val getAllPurchaseDetails = _getAllPurchaseDetails.asSharedFlow()
@@ -85,10 +98,10 @@ class CourseDetailsViewModel @Inject constructor(
         }
     }
 
-    fun submitPurchaseDetails() {
+    fun courseDetailsDelete(courseId: String) {
         startLoading()
         viewModelScope.launch {
-            purchaseDetailsSubmitUseCase(Unit)
+            courseDetailDeleteUseCase(courseId)
                 .onSuccess {
                     stopLoading()
                     _respondSuccess.tryEmit(true)
@@ -100,5 +113,79 @@ class CourseDetailsViewModel @Inject constructor(
                 }
         }
     }
+
+    fun submitPurchaseDetails(purchaseSubmitDto: PurchaseSubmitDto) {
+        startLoading()
+        viewModelScope.launch {
+            purchaseDetailsSubmitUseCase(purchaseSubmitDto)
+                .onSuccess {
+                    stopLoading()
+                    _respondSuccess.tryEmit(true)
+                }
+                .onFailure { result ->
+                    stopLoading()
+                    _respondSuccess.tryEmit(false)
+                    _errorDetails.tryEmit(result.getMessage())
+                }
+        }
+    }
+
+    fun updatePurchaseDetails(purchaseDetailsUpdate: PurchaseDetailsUpdate) {
+        startLoading()
+        viewModelScope.launch {
+            purchaseDetailsUpdateUseCase(purchaseDetailsUpdate)
+                .onSuccess {
+                    stopLoading()
+                    _respondSuccess.tryEmit(true)
+                }
+                .onFailure { result ->
+                    stopLoading()
+                    _respondSuccess.tryEmit(false)
+                    _errorDetails.tryEmit(result.getMessage())
+                }
+        }
+    }
+
+    fun purchaseDetailsDelete(purchaseId: String) {
+        startLoading()
+        viewModelScope.launch {
+            purchaseDetailsDeleteUseCase(purchaseId)
+                .onSuccess {
+                    stopLoading()
+                    _respondSuccess.tryEmit(true)
+                }
+                .onFailure { result ->
+                    stopLoading()
+                    _respondSuccess.tryEmit(false)
+                    _errorDetails.tryEmit(result.getMessage())
+                }
+        }
+    }
+
+    fun getVideoDetails(course_id: String) {
+        startLoading()
+        viewModelScope.launch {
+            videoDetailsUseCase(course_id).onSuccess {
+                stopLoading()
+                _coursesVideoPlayer.tryEmit(it?.courseVideo ?: emptyList())
+            }.onFailure {
+                stopLoading()
+            }
+        }
+    }
+
+    fun videoDetailsDelete(videoId: String) {
+        startLoading()
+        viewModelScope.launch {
+            courseDetailDeleteUseCase(videoId).onSuccess {
+                stopLoading()
+                _respondSuccess.tryEmit(true)
+            }.onFailure {
+                _respondSuccess.tryEmit(false)
+                stopLoading()
+            }
+        }
+    }
+
 
 }
