@@ -49,6 +49,12 @@ buildscript {
         // Pluto
         pluto = '1.1.1'
 
+        //navigation_args
+        nav_args = '2.5.3'
+
+        // swipe refresh
+        swipe_refresh = '1.1.0'
+
         //lifecycle aware
         androidXLifecycleRuntimeKtx = "2.5.1"
         androidXSecurityCrypto = "1.1.0-alpha03"
@@ -67,6 +73,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$androidXNavigation"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_args"
     }
 
 }

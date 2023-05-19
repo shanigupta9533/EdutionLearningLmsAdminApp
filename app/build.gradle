@@ -4,14 +4,15 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
-    namespace 'com.edutionAdminLearning.edutionlearningadminapp'
+    namespace 'com.edutionAdminLearning.edutionLearningAdmin'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.edutionAdminLearning.edutionlearningadminapp"
+        applicationId "com.edutionAdminLearning.edutionLearningAdmin"
         minSdk 23
         targetSdk 33
         versionCode 2
@@ -143,6 +144,10 @@ dependencies {
 
     // joda time
     implementation 'joda-time:joda-time:2.12.5'
+
+    // swipe refresh layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh"
+
 
 
 }

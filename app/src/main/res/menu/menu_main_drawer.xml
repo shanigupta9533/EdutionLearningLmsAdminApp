@@ -6,22 +6,34 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/support"
-            android:icon="@drawable/support_icon"
-            android:iconTint="@color/blue_5A4BDA"
-            android:title="@string/support" />
-
-        <item
-            android:id="@+id/chat_with_us"
+            android:id="@+id/user_details"
             android:icon="@drawable/chat_icon"
             android:iconTint="@color/blue_5A4BDA"
-            android:title="@string/chat_with_us" />
+            android:title="@string/users_details" />
 
         <item
-            android:id="@+id/enquiry_about_course"
+            android:id="@+id/course_details"
+            android:icon="@drawable/chat_icon"
+            android:iconTint="@color/blue_5A4BDA"
+            android:title="@string/courseDetails" />
+
+        <item
+            android:id="@+id/banner_details"
             android:icon="@drawable/enquiry_icon"
             android:iconTint="@color/blue_5A4BDA"
-            android:title="@string/enquiry_about_course" />
+            android:title="@string/banner" />
+
+        <item
+            android:id="@+id/notification"
+            android:icon="@drawable/enquiry_icon"
+            android:iconTint="@color/blue_5A4BDA"
+            android:title="@string/notification" />
+
+        <item
+            android:id="@+id/admin_access"
+            android:icon="@drawable/enquiry_icon"
+            android:iconTint="@color/blue_5A4BDA"
+            android:title="@string/admin_access" />
 
         <item
             android:id="@+id/logout"

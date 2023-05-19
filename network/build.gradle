@@ -27,14 +27,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", '"http://192.168.29.228:8000/api/admin"'
+            buildConfigField "String", "BASE_URL", '"http://192.168.112.206:8000"'
             buildConfigField "String", "ONE_SIGNAL_APP_ID", '"43ab056f-6069-4bf9-ba12-395b495dbb19"'
         }
 
         debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", '"http://192.168.29.228:8000/api/admin"'
+            buildConfigField "String", "BASE_URL", '"http://192.168.112.206:8000"'
             buildConfigField "String", "ONE_SIGNAL_APP_ID", '"43ab056f-6069-4bf9-ba12-395b495dbb19"'
         }
 

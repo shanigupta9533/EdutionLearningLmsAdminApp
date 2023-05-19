@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startLandingFragment">
+
+    <fragment
+        android:id="@+id/startLandingFragment"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.StartLandingFragment"
+        tools:layout="@layout/fragment_start_landing"
+        android:label="startLandingFragment" >
+
+        <argument
+            android:name="fwdLocation"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <action
+            android:id="@+id/goToCourses"
+            app:popUpTo="@id/startLandingFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/coursesFragment" />
+
+        <action
+            android:id="@+id/goToBanners"
+            app:popUpTo="@id/startLandingFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/bannersDetailsFragment" />
+
+        <action
+            android:id="@+id/goToNotification"
+            app:popUpTo="@id/startLandingFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/notificationsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/coursesFragment"
+        tools:layout="@layout/fragment_courses"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CoursesFragment"
+        android:label="HomeFragment" >
+
+        <action
+            android:id="@+id/goToCoursesVideos"
+            app:destination="@id/courseVideosFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/courseVideosFragment"
+        tools:layout="@layout/fragment_course_videos"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CourseVideosFragment"
+        android:label="CourseVideosFragment" />
+
+    <fragment
+        android:id="@+id/bannersDetailsFragment"
+        tools:layout="@layout/fragment_banners_details"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.BannersDetailsFragment"
+        android:label="BannersDetailsFragment" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        tools:layout="@layout/fragment_notifications"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.NotificationsFragment"
+        android:label="NotificationsFragment" />
+
+</navigation>

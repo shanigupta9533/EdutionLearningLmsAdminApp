@@ -61,7 +61,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="home_page">Home Page</string>
     <string name="full_stack_development">Full Stack Development</string>
-    <string name="edution_learning">Edution Learning</string>
+    <string name="edution_learning">Edution Learning Admin</string>
     <string name="lecture_1_html_basic_structure">Lecture - 1 : html basic structure</string>
     <string name="choose_your_plan">Choose your plan</string>
     <string name="basic_plan">Basic Plan</string>
@@ -88,5 +88,8 @@
     <string name="premium">Premium</string>
     <string name="notification">Notification</string>
     <string name="coming_soon">Coming Soon</string>
+    <string name="courseDetails">Course Details</string>
+    <string name="banner">Banner</string>
+    <string name="admin_access">Admin Access</string>
 
 </resources>

@@ -30,4 +30,13 @@
     <string name="logout">Logout</string>
     <string name="edution_learning_pvt_ltd">Edution Learning Pvt Ltd</string>
     <string name="please_wait">please wait...</string>
+    <string name="users_details">Users Details</string>
+    <string name="users_otp">Users Otp</string>
+    <string name="all_courses">All Courses</string>
+    <string name="course_videos">Course Videos</string>
+    <string name="edit_details">Edit Details</string>
+    <string name="delete">Delete</string>
+    <string name="courses_details">Courses Details</string>
+    <string name="banners_details">Banners Details</string>
+    <string name="notification_details">Notification Details</string>
 </resources>

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homePageFragment">
+    app:startDestination="@id/edutionLandingFragment">
 
     <fragment
-        android:id="@+id/homePageFragment"
-        app:route="@string/home_page"
+        android:id="@+id/edutionLandingFragment"
+        tools:layout="@layout/fragment_edution_landing"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.EdutionLandingFragment"
         android:label="HomePageFragment" />
 
 </navigation>

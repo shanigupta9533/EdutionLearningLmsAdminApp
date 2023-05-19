@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/project_color"
+        android:orientation="vertical"
+        tools:context=".Activity.LoginActivity">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="185dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/login"
+                    android:src="@drawable/login_image_external" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_marginTop="10dp"
+                    android:alpha="0.8"
+                    android:fontFamily="@font/gilroy_bold"
+                    android:text="@string/welcome_back"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dimen_2dp"
+                    android:alpha="0.5"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/sign_in_to_continue"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:layout_marginEnd="@dimen/dimen_20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/dimen_12dp"
+                        android:fontFamily="@font/gilroy_semi_bold"
+                        android:text="@string/phone_number"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dimen_16sp" />
+
+                    <EditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:paddingVertical="@dimen/dimen_12dp"
+                        android:paddingHorizontal="@dimen/dimen_20dp"
+                        android:background="@drawable/round_login_design"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:hint="@string/enter_your_phone_number"
+                        android:inputType="phone"
+                        android:digits="0123456789"
+                        android:autofillHints="phone"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textColorHint="#8c8c8c"
+                        android:textSize="@dimen/dimen_15sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_18"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="@dimen/dimen_12dp"
+                        android:fontFamily="@font/gilroy_semi_bold"
+                        android:text="@string/password"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dimen_16sp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_layout_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        android:layout_marginTop="@dimen/dimen_9dp"
+                        app:hintEnabled="false"
+                        app:passwordToggleDrawable="@drawable/show_password_selector"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="#8c8c8c">
+
+                        <EditText
+                            android:id="@+id/password_toggle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/round_login_design"
+                            android:paddingVertical="@dimen/dimen_12dp"
+                            android:paddingHorizontal="@dimen/dimen_20dp"
+                            android:fontFamily="@font/gilroy_medium"
+                            android:hint="@string/your_password"
+                            android:inputType="textPassword"
+                            android:maxLines="1"
+                            android:textColor="@color/white"
+                            android:autofillHints="password"
+                            android:textColorHint="#8c8c8c"
+                            android:textSize="@dimen/dimen_15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/login_button"
+                    android:layout_width="250dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="35dp"
+                    android:background="@drawable/design_as_yellow_gradient"
+                    android:clickable="true"
+                    android:focusable="true"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/gilroy_semi_bold"
+                        android:text="@string/login"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <include
+            layout="@layout/transparent_progress_bar_layout"
+            android:layout_width="match_parent"
+            android:id="@+id/progress_bar"
+            android:layout_height="match_parent"
+            />
+
+    </RelativeLayout>
+
+</layout>
