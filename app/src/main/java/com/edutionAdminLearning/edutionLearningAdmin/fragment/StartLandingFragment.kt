@@ -37,6 +37,12 @@ class StartLandingFragment : ViewBindingFragment<FragmentStartLandingBinding>(
                 )
             }
 
+            FWD_LOCATION_ADMIN_ACCESS -> {
+                findNavController().navigate(
+                    StartLandingFragmentDirections.goToAdminUsers()
+                )
+            }
+
             FWD_LOCATION_USER_DETAILS -> {
 
             }
@@ -52,6 +58,7 @@ class StartLandingFragment : ViewBindingFragment<FragmentStartLandingBinding>(
         const val FWD_LOCATION_COURSES = "SARTHI_COURSES"
         const val FWD_LOCATION_BANNERS = "SARTHI_BANNERS"
         const val FWD_LOCATION_NOTIFICATION = "SARTHI_NOTIFICATIONS"
+        const val FWD_LOCATION_ADMIN_ACCESS = "SARTHI_ADMIN_ACCESS"
         const val FWD_LOCATION_USER_DETAILS = "SARTHI_USERS_DETAILS"
     }
 

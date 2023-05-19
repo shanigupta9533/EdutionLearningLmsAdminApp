@@ -39,4 +39,27 @@
     <string name="courses_details">Courses Details</string>
     <string name="banners_details">Banners Details</string>
     <string name="notification_details">Notification Details</string>
+    <string name="admin_access_users">Admin Access Users</string>
+    <string name="course_name">Course Name</string>
+    <string name="course_desc">Course Desc</string>
+    <string name="course_basic_price">Course Basic Price</string>
+    <string name="drag_amp_drop_image_here"><![CDATA[Drag & Drop a image here]]></string>
+    <string name="drag_amp_drop_home_work_pdf"><![CDATA[Drag & Drop home work pdf here]]></string>
+    <string name="drag_amp_drop_project_pdf"><![CDATA[Drag & Drop project pdf here]]></string>
+    <string name="drag_amp_drop_video"><![CDATA[Drag & Drop a video here]]></string>
+    <string name="drag_amp_drop_code_file"><![CDATA[Drag & Drop code file here]]></string>
+    <string name="or">Or</string>
+    <string name="browser_file">browser file</string>
+    <string name="from_device">from device</string>
+    <string name="submit_course_details">Submit Course Details</string>
+    <string name="insert_course_details">Insert Course Details</string>
+    <string name="course_videos_insert">Course Videos Insert</string>
+    <string name="lecture_name">Lecture Name</string>
+    <string name="enter_message_text_here">Enter Message Text Here</string>
+    <string name="submit_banner_details">Submit Banner Details</string>
+    <string name="banner_details_insert">Banner Details Insert</string>
+    <string name="notification_insert">Notification Insert</string>
+    <string name="enter_notification_message">Enter Notification Message</string>
+    <string name="submit_notification">Submit Notification</string>
+    <string name="course_purchase_details">Course Purchase Details</string>
 </resources>

@@ -109,6 +109,12 @@
         <item name="fontFamily">@font/poppins</item>
     </style>
 
+
+    <style name="Cut" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
     <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">@dimen/dimen_14sp</item>
         <item name="fontFamily">@font/gilroy_semi_bold</item>

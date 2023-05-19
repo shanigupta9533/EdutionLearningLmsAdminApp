@@ -4,6 +4,7 @@ import android.view.Menu
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.edutionAdminLearning.core_ui.adapter.GenericRecyclerViewAdapter
 import com.edutionAdminLearning.core_ui.fragment.ViewModelBindingFragment
 import com.edutionAdminLearning.edutionLearningAdmin.R
@@ -36,6 +37,12 @@ class CourseVideosFragment : ViewModelBindingFragment<FragmentCourseVideosBindin
                 delay(3000)
                 swipeLayout.isRefreshing = false
             }
+        }
+
+        toolbar.addIcon.setOnClickListener {
+            findNavController().navigate(
+                CourseVideosFragmentDirections.goToCourseVideosInsert()
+            )
         }
 
         toolbar.appCompatImageView.setOnClickListener {

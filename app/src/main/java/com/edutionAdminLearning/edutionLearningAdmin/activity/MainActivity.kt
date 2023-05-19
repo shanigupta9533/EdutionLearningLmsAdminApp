@@ -56,6 +56,9 @@ class MainActivity : PWViewBindingActivity<ActivityMainBinding>(
                 }
 
                 R.id.admin_access -> {
+                    AppNavigationActivity.start(
+                        context = this@MainActivity,
+                        fwdLocation = StartLandingFragment.FWD_LOCATION_ADMIN_ACCESS)
                 }
 
                 R.id.logout -> {

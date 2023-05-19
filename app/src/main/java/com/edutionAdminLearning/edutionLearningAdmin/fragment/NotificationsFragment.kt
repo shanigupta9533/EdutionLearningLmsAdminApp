@@ -4,6 +4,7 @@ import android.view.Menu
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.edutionAdminLearning.core_ui.adapter.GenericRecyclerViewAdapter
 import com.edutionAdminLearning.core_ui.fragment.ViewModelBindingFragment
 import com.edutionAdminLearning.edutionLearningAdmin.R
@@ -35,6 +36,12 @@ class NotificationsFragment : ViewModelBindingFragment<FragmentNotificationsBind
                 delay(3000)
                 swipeLayout.isRefreshing = false
             }
+        }
+
+        toolbar.addIcon.setOnClickListener {
+            findNavController().navigate(
+                NotificationsFragmentDirections.goToNotificationInsert()
+            )
         }
 
         toolbar.appCompatImageView.setOnClickListener {

@@ -34,6 +34,12 @@
             app:popUpToInclusive="true"
             app:destination="@id/notificationsFragment" />
 
+        <action
+            android:id="@+id/goToAdminUsers"
+            app:popUpTo="@id/startLandingFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/adminUsersFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/coursesFragment"
@@ -44,6 +50,12 @@
         <action
             android:id="@+id/goToCoursesVideos"
             app:destination="@id/courseVideosFragment" />
+        <action
+            android:id="@+id/goToCoursesInsert"
+            app:destination="@id/courseInsertFragment" />
+        <action
+            android:id="@+id/goToCoursePurchased"
+            app:destination="@id/coursePurchaseFragment" />
 
     </fragment>
 
@@ -51,17 +63,67 @@
         android:id="@+id/courseVideosFragment"
         tools:layout="@layout/fragment_course_videos"
         android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CourseVideosFragment"
-        android:label="CourseVideosFragment" />
+        android:label="CourseVideosFragment" >
+        <action
+            android:id="@+id/goToCourseVideosInsert"
+            app:destination="@id/courseVideosInsertFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/bannersDetailsFragment"
         tools:layout="@layout/fragment_banners_details"
         android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.BannersDetailsFragment"
-        android:label="BannersDetailsFragment" />
+        android:label="BannersDetailsFragment" >
+
+        <action
+            android:id="@+id/goToBannerInsert"
+            app:destination="@id/bannerInsertFragment" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/notificationsFragment"
         tools:layout="@layout/fragment_notifications"
         android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.NotificationsFragment"
-        android:label="NotificationsFragment" />
+        android:label="NotificationsFragment" >
+        <action
+            android:id="@+id/goToNotificationInsert"
+            app:destination="@id/notificationInsertFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/adminUsersFragment"
+        tools:layout="@layout/fragment_admin_users"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.AdminUsersFragment"
+        android:label="AdminUsersFragment" />
+
+    <fragment
+        android:id="@+id/courseInsertFragment"
+        tools:layout="@layout/fragment_course_insert"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CourseInsertFragment"
+        android:label="CourseInsertFragment" />
+    <fragment
+        android:id="@+id/courseVideosInsertFragment"
+        tools:layout="@layout/fragment_course_videos_insert"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CourseVideosInsertFragment"
+        android:label="CourseVideosInsertFragment" />
+
+    <fragment
+        android:id="@+id/bannerInsertFragment"
+        tools:layout="@layout/fragment_banner_insert"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.BannerInsertFragment"
+        android:label="BannerInsertFragment" />
+
+    <fragment
+        android:id="@+id/notificationInsertFragment"
+        tools:layout="@layout/fragment_notification_insert"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.NotificationInsertFragment"
+        android:label="NotificationInsertFragment" />
+
+    <fragment
+        android:id="@+id/coursePurchaseFragment"
+        tools:layout="@layout/fragment_course_purchase"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CoursePurchaseFragment"
+        android:label="CoursePurchaseFragment" />
 
 </navigation>

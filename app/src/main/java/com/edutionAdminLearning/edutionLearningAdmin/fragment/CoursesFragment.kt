@@ -31,6 +31,12 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, HomeDet
         recyclerView.adapter = adapter
         adapter.submitList((0..20).toList())
 
+        toolbar.addIcon.setOnClickListener {
+            findNavController().navigate(
+                CoursesFragmentDirections.goToCoursesInsert()
+            )
+        }
+
         swipeLayout.setOnRefreshListener {
             viewLifecycleScope?.launch {
                 delay(3000)
@@ -81,6 +87,10 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, HomeDet
                     )
                 }
                 1 -> {
+
+                    findNavController().navigate(
+                        CoursesFragmentDirections.goToCoursePurchased()
+                    )
 
                 }
                 2 -> {
