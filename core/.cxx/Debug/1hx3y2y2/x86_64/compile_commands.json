@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/Users/shanigupta/AndroidStudioProjects/EdutionLearningUsersApp/core/.cxx/Debug/1hx3y2y2/x86_64",
-  "command": "/Users/shanigupta/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=x86_64-none-linux-android23 --gcc-toolchain=/Users/shanigupta/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/shanigupta/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcore_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -o CMakeFiles/core.dir/core.cpp.o -c /Users/shanigupta/AndroidStudioProjects/EdutionLearningUsersApp/core/src/main/cpp/core.cpp",
-  "file": "/Users/shanigupta/AndroidStudioProjects/EdutionLearningUsersApp/core/src/main/cpp/core.cpp"
-}
-]
