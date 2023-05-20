@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="purchaseSpec"
+            type="com.edutionAdminLearning.edutionLearningAdmin.data.model.PurchasedSpecSubmitDto" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/dimen_12dp"
+        android:layout_marginEnd="@dimen/dimen_12dp"
+        android:layout_marginTop="@dimen/dimen_12dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="@dimen/dimen_12dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/availability"
+            app:shapeAppearance="@style/Cut"
+            app:layout_constraintStart_toStartOf="parent"
+            android:hint="@string/course_specification"
+            app:hintTextColor="@color/grey_888888">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:fontFamily="@font/gilroy_medium"
+                android:id="@+id/course_spec"
+                android:textSize="@dimen/dimen_14sp"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:layout_width="@dimen/_35ssp"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/blue_5A4BDA"
+            android:gravity="center"
+            android:id="@+id/availability"
+            app:layout_constraintEnd_toStartOf="@+id/delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/dp_26"
+            android:layout_height="@dimen/dp_26"
+            android:id="@+id/delete"
+            android:src="@drawable/ic_delete_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:alpha="0.7"
+            android:tint="@color/grey_3d3d3d"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

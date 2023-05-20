@@ -62,4 +62,10 @@
     <string name="enter_notification_message">Enter Notification Message</string>
     <string name="submit_notification">Submit Notification</string>
     <string name="course_purchase_details">Course Purchase Details</string>
+    <string name="insert_course_purchase_details">Insert Course Purchase Details</string>
+    <string name="course_type">Course Type</string>
+    <string name="course_price">Course Price</string>
+    <string name="submit_course_purchase_details">Submit Course Purchase Details</string>
+    <string name="course_specification">Course Specification</string>
+    <string name="add_new_item">Add New Item</string>
 </resources>

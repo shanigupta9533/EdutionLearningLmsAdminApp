@@ -40,7 +40,7 @@ class CoursePurchaseFragment: ViewModelBindingFragment<FragmentCoursePurchaseBin
 
         toolbar.addIcon.setOnClickListener {
             findNavController().navigate(
-                BannersDetailsFragmentDirections.goToBannerInsert()
+                CoursePurchaseFragmentDirections.goToCoursePurchasedInsert()
             )
         }
 

@@ -52,6 +52,13 @@ class CourseDetailsViewModel @Inject constructor(
     private val _errorDetails = MutableSharedFlow<String?>(extraBufferCapacity = 1)
     val errorDetails = _errorDetails.asSharedFlow()
 
+    private val _deletePurchaseSpec = MutableSharedFlow<Int>(extraBufferCapacity = 1)
+    val deletePurchaseSpec = _deletePurchaseSpec.asSharedFlow()
+
+    fun deletePurchaseSpec(position: Int){
+        _deletePurchaseSpec.tryEmit(position)
+    }
+
     fun getAllCourses() {
         startLoading()
         viewModelScope.launch {

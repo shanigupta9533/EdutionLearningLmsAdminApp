@@ -124,6 +124,16 @@
         android:id="@+id/coursePurchaseFragment"
         tools:layout="@layout/fragment_course_purchase"
         android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CoursePurchaseFragment"
-        android:label="CoursePurchaseFragment" />
+        android:label="CoursePurchaseFragment" >
+        <action
+            android:id="@+id/goToCoursePurchasedInsert"
+            app:destination="@id/coursePurchaseInsertFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/coursePurchaseInsertFragment"
+        tools:layout="@layout/fragment_course_purchase_insert"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CoursePurchaseInsertFragment"
+        android:label="CoursePurchaseInsertFragment" />
 
 </navigation>
