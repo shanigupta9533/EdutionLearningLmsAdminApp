@@ -13,6 +13,8 @@ data class CourseDetailDto(
     val coursePriceDetails: String?=null,
     @SerializedName("created_at")
     val createdAt: String?=null,
+    @SerializedName("is_live")
+    val isLive: Boolean?=null,
     @SerializedName("id")
     val id: String?=null,
     @SerializedName("updated_at")

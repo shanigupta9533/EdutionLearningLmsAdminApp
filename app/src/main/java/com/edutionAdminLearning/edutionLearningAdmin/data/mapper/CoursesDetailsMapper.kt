@@ -16,6 +16,7 @@ class CoursesDetailsMapper @Inject constructor() : Mapper<CoursesDetailsData, Co
             createdAt = dto.createdAt.value,
             id = dto.id.value,
             updatedAt = dto.updatedAt.value,
+            isLive = dto.isLive ?: false
         )
 
     }

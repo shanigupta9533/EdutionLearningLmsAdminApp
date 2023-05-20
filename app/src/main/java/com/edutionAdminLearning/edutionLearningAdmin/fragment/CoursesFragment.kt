@@ -8,20 +8,21 @@ import androidx.navigation.fragment.findNavController
 import com.edutionAdminLearning.core_ui.adapter.GenericRecyclerViewAdapter
 import com.edutionAdminLearning.core_ui.fragment.ViewModelBindingFragment
 import com.edutionAdminLearning.edutionLearningAdmin.R
+import com.edutionAdminLearning.edutionLearningAdmin.data.model.CoursesDetailsData
 import com.edutionAdminLearning.edutionLearningAdmin.databinding.CourseListAdapterLayoutBinding
 import com.edutionAdminLearning.edutionLearningAdmin.databinding.FragmentCoursesBinding
-import com.edutionAdminLearning.edutionLearningAdmin.viewmodel.HomeDetailsViewModel
+import com.edutionAdminLearning.edutionLearningAdmin.viewmodel.CourseDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, HomeDetailsViewModel>(
+class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, CourseDetailsViewModel>(
     FragmentCoursesBinding::inflate
 ) {
 
     private val adapter by lazy { createLectureAdapter() }
-    override val viewModel: HomeDetailsViewModel by viewModels()
+    override val viewModel: CourseDetailsViewModel by viewModels()
 
     override fun FragmentCoursesBinding.setViewBindingVariables() {
         toolbarText = getString(R.string.courses_details)
@@ -29,12 +30,18 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, HomeDet
 
     override fun FragmentCoursesBinding.setViewModelBindingData() {
         recyclerView.adapter = adapter
-        adapter.submitList((0..20).toList())
 
+        viewModel.getAllCourses()
         toolbar.addIcon.setOnClickListener {
             findNavController().navigate(
                 CoursesFragmentDirections.goToCoursesInsert()
             )
+        }
+
+        viewLifecycleScope?.launch {
+            viewModel.getAllCourses.collect {
+                adapter.submitList(it)
+            }
         }
 
         swipeLayout.setOnRefreshListener {
@@ -50,7 +57,7 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, HomeDet
 
     }
 
-    private fun createLectureAdapter(): GenericRecyclerViewAdapter<Int> {
+    private fun createLectureAdapter(): GenericRecyclerViewAdapter<CoursesDetailsData> {
         return GenericRecyclerViewAdapter(
             getViewLayout = { R.layout.course_list_adapter_layout },
             areItemsSame = ::sameCourseSlot,
@@ -72,12 +79,15 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, HomeDet
         )
     }
 
-    private fun View.createShowPopup(data: Int) = PopupMenu(requireContext(), this).apply {
+    private fun View.createShowPopup(coursesDetailsData: CoursesDetailsData) = PopupMenu(requireContext(), this).apply {
         menu.add(Menu.NONE, 0, 0, "Video Details")
         menu.add(Menu.NONE, 1, 1, "Purchase Details")
         menu.add(Menu.NONE, 1, 1, "Delete Course")
-        menu.add(Menu.NONE, 2, 2, "Disable")
-        menu.add(Menu.NONE, 3, 3, "Enable")
+
+        if (coursesDetailsData.isLive)
+            menu.add(Menu.NONE, 2, 2, "Disable")
+        else
+            menu.add(Menu.NONE, 3, 3, "Enable")
 
         setOnMenuItemClickListener {
             when (it.itemId) {
@@ -86,6 +96,7 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, HomeDet
                         CoursesFragmentDirections.goToCoursesVideos()
                     )
                 }
+
                 1 -> {
 
                     findNavController().navigate(
@@ -93,9 +104,11 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, HomeDet
                     )
 
                 }
+
                 2 -> {
 
                 }
+
                 3 -> {
 
                 }
@@ -105,8 +118,8 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, HomeDet
 
     }
 
-    private fun sameCourseSlot(old: Int, new: Int): Boolean {
-        return old == new
+    private fun sameCourseSlot(old: CoursesDetailsData, new: CoursesDetailsData): Boolean {
+        return old.id == new.id
     }
 
     override fun onBackPressed(): Boolean {
