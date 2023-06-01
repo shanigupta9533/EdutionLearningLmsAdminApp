@@ -9,6 +9,12 @@
             name="toolbarText"
             type="String" />
 
+        <variable
+            name="vm"
+            type="com.edutionAdminLearning.edutionLearningAdmin.viewmodel.CourseDetailsViewModel" />
+
+        <import type="android.view.View"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,6 +76,8 @@
                         android:fontFamily="@font/gilroy_medium"
                         android:id="@+id/course_price"
                         android:textSize="@dimen/dimen_14sp"
+                        android:digits="0123456789"
+                        android:inputType="number|phone"
                         android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -127,6 +135,14 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.core.widget.NestedScrollView>
+
+        <include layout="@layout/progress_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:visibility="@{vm.loading ? View.VISIBLE : View.GONE}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

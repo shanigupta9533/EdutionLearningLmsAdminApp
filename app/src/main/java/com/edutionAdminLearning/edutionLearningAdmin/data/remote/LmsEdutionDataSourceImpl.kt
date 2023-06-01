@@ -39,15 +39,21 @@ class LmsEdutionDataSourceImpl @Inject constructor(
         }.getDataResult()
     }
 
+    override suspend fun coursesUpdateLive(courseId: String): MyResult<Unit, CompleteApiError<Error>> {
+        return exeApi {
+            lmsApi.courseUpdateLive(courseId)
+        }.getDataResult()
+    }
+
     override suspend fun coursesDetailsDelete(params: String): MyResult<Unit, CompleteApiError<Error>> {
         return exeApi {
             lmsApi.deleteCourseDetails(params)
         }.getDataResult()
     }
 
-    override suspend fun getPurchaseDetails(): MyResult<List<PurchaseDetailsDto>, CompleteApiError<Error>> {
+    override suspend fun getPurchaseDetails(params: String): MyResult<List<PurchaseDetailsDto>, CompleteApiError<Error>> {
         return exeApi {
-            lmsApi.getPurchaseDetails()
+            lmsApi.getPurchaseDetails(params)
         }.getDataResult()
     }
 
@@ -111,6 +117,18 @@ class LmsEdutionDataSourceImpl @Inject constructor(
     override suspend fun videoDeleteDetails(videoId: String): MyResult<Unit, CompleteApiError<Error>> {
         return exeApi {
             lmsApi.courseVideoDelete(videoId)
+        }.getDataResult()
+    }
+
+    override suspend fun getUserSplash(): MyResult<UserDetailsResponseDto?, CompleteApiError<Error>> {
+        return exeApi {
+            lmsApi.getUserInSplash()
+        }.getDataResult()
+    }
+
+    override suspend fun userLogout(): MyResult<UserDetailsResponseDto, CompleteApiError<Error>> {
+        return exeApi {
+            lmsApi.getLogoutUser()
         }.getDataResult()
     }
 

@@ -3,6 +3,7 @@ package com.edutionAdminLearning.edutionLearningAdmin.data.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class CoursesDetailsData(
     val courseDesc: String,
     val courseImage: String,
@@ -12,4 +13,4 @@ data class CoursesDetailsData(
     val isLive: Boolean,
     val id: String,
     val updatedAt: String
-)
+) : Parcelable

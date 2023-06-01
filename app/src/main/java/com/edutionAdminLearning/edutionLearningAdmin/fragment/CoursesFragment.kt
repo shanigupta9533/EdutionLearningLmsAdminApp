@@ -1,10 +1,13 @@
 package com.edutionAdminLearning.edutionLearningAdmin.fragment
 
+import android.annotation.SuppressLint
 import android.view.Menu
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.edutionAdminLearning.core_ui.adapter.GenericRecyclerViewAdapter
 import com.edutionAdminLearning.core_ui.fragment.ViewModelBindingFragment
 import com.edutionAdminLearning.edutionLearningAdmin.R
@@ -26,9 +29,13 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, CourseD
 
     override fun FragmentCoursesBinding.setViewBindingVariables() {
         toolbarText = getString(R.string.courses_details)
+        vm = viewModel
+
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun FragmentCoursesBinding.setViewModelBindingData() {
+        lifecycleOwner = viewLifecycleOwner
         recyclerView.adapter = adapter
 
         viewModel.getAllCourses()
@@ -36,6 +43,20 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, CourseD
             findNavController().navigate(
                 CoursesFragmentDirections.goToCoursesInsert()
             )
+        }
+
+        adapter.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                recyclerView.scrollToPosition(0)
+            }
+        })
+
+        viewLifecycleScope?.launch {
+            viewModel.respondSuccess.collect {
+                if (it) {
+                    viewModel.getAllCourses()
+                }
+            }
         }
 
         viewLifecycleScope?.launch {
@@ -46,6 +67,7 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, CourseD
 
         swipeLayout.setOnRefreshListener {
             viewLifecycleScope?.launch {
+                viewModel.getAllCourses()
                 delay(3000)
                 swipeLayout.isRefreshing = false
             }
@@ -68,49 +90,58 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, CourseD
                     }
 
                     editIcon.setOnClickListener {
-
+                        findNavController().navigate(
+                            CoursesFragmentDirections.goToCoursesInsert(
+                                data = data,
+                                isUpdate = true
+                            )
+                        )
                     }
 
                     deleteIcon.setOnClickListener {
-
+                        viewModel.deleteCourseDetails(data.id)
                     }
                 }
             },
         )
     }
 
+    override fun onPause() {
+        super.onPause()
+        binding.swipeLayout.isRefreshing = false
+    }
+
     private fun View.createShowPopup(coursesDetailsData: CoursesDetailsData) = PopupMenu(requireContext(), this).apply {
-        menu.add(Menu.NONE, 0, 0, "Video Details")
-        menu.add(Menu.NONE, 1, 1, "Purchase Details")
-        menu.add(Menu.NONE, 1, 1, "Delete Course")
+        menu.add(Menu.NONE, 0, 0, context.getString(R.string.video_details))
+        menu.add(Menu.NONE, 1, 1, context.getString(R.string.purchase_details))
 
         if (coursesDetailsData.isLive)
-            menu.add(Menu.NONE, 2, 2, "Disable")
+            menu.add(Menu.NONE, 2, 2, context.getString(R.string.disable))
         else
-            menu.add(Menu.NONE, 3, 3, "Enable")
+            menu.add(Menu.NONE, 3, 3, context.getString(R.string.enable))
 
         setOnMenuItemClickListener {
             when (it.itemId) {
                 0 -> {
                     findNavController().navigate(
-                        CoursesFragmentDirections.goToCoursesVideos()
+                        CoursesFragmentDirections.goToCoursesVideos(coursesDetailsData.id)
                     )
                 }
 
                 1 -> {
 
                     findNavController().navigate(
-                        CoursesFragmentDirections.goToCoursePurchased()
+                        CoursesFragmentDirections.goToCoursePurchased(coursesDetailsData.id)
                     )
 
                 }
 
                 2 -> {
-
+                   viewModel.updateCourseUpdateLive(coursesDetailsData.id)
                 }
 
                 3 -> {
-
+                    viewModel.updateCourseUpdateLive(coursesDetailsData.id)
                 }
             }
             false

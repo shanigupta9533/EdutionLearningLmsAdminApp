@@ -27,7 +27,7 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 const val MESSAGE_DENIED = "Permission Denied"
-const val MAIN_FOLDER_NAME = "/physicsWallahUpload"
+const val MAIN_FOLDER_NAME = "/edutionLearningUpload"
 const val MAIN_FILE_NAME = "/PhysicsWallah"
 const val RECORDING_FILE_LOCATION = "/recording"
 const val CREATED_AUDIO_FILE_EXTENSION = ".mp3"

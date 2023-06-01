@@ -33,7 +33,6 @@ interface LmsApi {
         @Body body: LoginSubmitDto
     ): Response<ApiResponse<UserDetailsResponseDto>>
 
-    @FormUrlEncoded
     @GET("api/admin/allCourses")
     suspend fun getAllCoursesDetails(
     ): Response<ApiResponse<List<CourseDetailDto>>>
@@ -45,20 +44,21 @@ interface LmsApi {
 
     @GET("api/admin/purchaseDetails")
     suspend fun getPurchaseDetails(
+       @Query("course_id") params: String
     ): Response<ApiResponse<List<PurchaseDetailsDto>>>
 
-    @POST("api/admin/purchaseDetails")
+    @POST("api/admin/purchaseSpec")
     suspend fun purchaseInsert(
         @Body purchaseSubmitDto: PurchaseSubmitDto
     ): Response<ApiResponse<Unit>>
 
-    @POST("api/admin/purchaseSpec/{purchaseId}")
+    @POST("api/admin/purchaseSpec/{purchaseId}?_method=PUT")
     suspend fun purchaseDetailsUpdate(
         @Path("purchaseId") purchaseId: String,
         @Body purchaseDetailsUpdateDto: PurchaseDetailsUpdateDto
     ): Response<ApiResponse<Unit>>
 
-    @DELETE("api/admin/purchaseSpec/{purchaseId}")
+    @DELETE("api/admin/purchaseDetails/{purchaseId}")
     suspend fun purchaseDetailsDelete(
         @Path("purchaseId") purchaseId: String,
     ): Response<ApiResponse<Unit>>
@@ -73,7 +73,7 @@ interface LmsApi {
         @Path("banner_id") bannerId: String
     ): Response<ApiResponse<Unit>>
 
-    @GET("api/admin/notification")
+    @GET("api/admin/allNotification")
     suspend fun getNotification(
     ): Response<ApiResponse<List<NotificationDataDto>>>
 
@@ -84,6 +84,11 @@ interface LmsApi {
     @POST("api/admin/notification")
     suspend fun notificationInsert(
         @Field("notice_text") notificationText: String
+    ): Response<ApiResponse<Unit>>
+
+    @POST("api/admin/courseIsLive/{course_id}?_method=PUT")
+    suspend fun courseUpdateLive(
+        @Path("course_id") courseId: String
     ): Response<ApiResponse<Unit>>
 
     @DELETE("api/admin/notification/{notificationId}")
@@ -100,6 +105,13 @@ interface LmsApi {
     suspend fun courseVideoDelete(
         @Path("video_id") videoId: String
     ): Response<ApiResponse<Unit>>
+
+    @POST("api/admin/logout")
+    suspend fun getLogoutUser(
+    ): Response<ApiResponse<UserDetailsResponseDto>>
+
+    @POST("api/admin/splash")
+    suspend fun getUserInSplash(): Response<ApiResponse<UserDetailsResponseDto>>
 
 
 }

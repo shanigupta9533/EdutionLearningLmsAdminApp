@@ -1,5 +1,6 @@
 package com.edutionAdminLearning.core_ui.view.dialog
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.edutionAdminLearning.core_ui.R
@@ -13,6 +14,11 @@ class StatusDialog(
 ) : ViewModelBindingDialogFragment<DialogStatusBinding, StatusDialogViewModel>(
     DialogStatusBinding::inflate
 ) {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.DialogTheme)
+    }
 
     enum class Status {
         FAILED, INTERNET_CONNECTION_ERROR, INFO, SUCCESS

@@ -17,7 +17,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AdminUsersFragment  : ViewModelBindingFragment<FragmentAdminUsersBinding, HomeDetailsViewModel>(
+class AdminUsersFragment: ViewModelBindingFragment<FragmentAdminUsersBinding, HomeDetailsViewModel>(
     FragmentAdminUsersBinding::inflate
 ) {
 

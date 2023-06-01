@@ -9,6 +9,20 @@
             name="toolbarText"
             type="String" />
 
+        <variable
+            name="vm"
+            type="com.edutionAdminLearning.edutionLearningAdmin.viewmodel.CourseDetailsViewModel" />
+
+        <variable
+            name="controller"
+            type="com.edutionAdminLearning.edutionLearningAdmin.fragment.CourseInsertFragment" />
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="fileUrl"
+            type="String" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,6 +106,8 @@
                         android:fontFamily="@font/gilroy_medium"
                         android:id="@+id/course_basic_price"
                         android:gravity="top"
+                        android:digits="0123456789"
+                        android:inputType="number|phone"
                         android:textSize="@dimen/dimen_14sp"
                         android:layout_height="wrap_content" />
 
@@ -103,6 +119,7 @@
                     android:background="@drawable/round_upload_section_design"
                     android:layout_marginTop="@dimen/dp_35"
                     android:layout_marginStart="@dimen/dimen_20dp"
+                    android:onClick="@{()->controller.chooseFile()}"
                     android:id="@+id/course_image_upload"
                     android:layout_marginEnd="@dimen/dimen_30dp"
                     android:layout_height="@dimen/dp_130">
@@ -178,6 +195,35 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
+                <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                app:cardElevation="@dimen/dimen_0dp"
+                android:layout_marginTop="@dimen/_40ssp"
+                tools:visibility="visible"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/dimen_12dp"
+                android:id="@+id/courseImageParent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/dp_80"
+                    imgUrl="@{fileUrl}"
+                    android:scaleType="centerCrop"
+                    android:layout_height="@dimen/dp_80"
+                    />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/dp_18"
+                    android:layout_height="@dimen/_18ssp"
+                    android:layout_gravity="end"
+                    android:layout_margin="@dimen/dimen_8dp"
+                    android:onClick="@{()->controller.cancelImage()}"
+                    android:src="@drawable/cancel_icon"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/submit"
                     android:layout_width="match_parent"
@@ -191,6 +237,7 @@
                     android:textColor="@color/white"
                     android:layout_marginTop="@dimen/dp_32"
                     android:textSize="@dimen/sp_14"
+                    android:onClick="@{()->controller.uploadDocument()}"
                     app:backgroundTint="@color/button_selector"
                     app:cornerRadius="@dimen/dimen_12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -201,6 +248,14 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.core.widget.NestedScrollView>
+
+        <include layout="@layout/progress_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:visibility="@{vm.loading ? View.VISIBLE : View.GONE}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

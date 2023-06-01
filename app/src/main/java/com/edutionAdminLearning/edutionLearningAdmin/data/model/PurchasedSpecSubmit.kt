@@ -1,10 +1,9 @@
 package com.edutionAdminLearning.edutionLearningAdmin.data.model
 
-import com.google.gson.annotations.SerializedName
+import com.edutionAdminLearning.core.type.EMPTY
 
-data class PurchasedSpecSubmitDto(
-    @SerializedName("spec_name")
-    var specName: String,
-    @SerializedName("available")
-    var available: Boolean
+data class PurchasedSpecSubmit(
+    var specName: String = String.EMPTY,
+    var available: Boolean = false,
+    val purchaseSpecId: String? = null,
 )

@@ -115,6 +115,17 @@
         <item name="cornerSize">12dp</item>
     </style>
 
+    <style name="BottomSheetDialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetBackground</item>
+    </style>
+
+    <style name="bottomSheetBackground" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_top_corners</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_13dp</item>
+        <item name="android:layout_marginStart">@dimen/dimen_13dp</item>
+        <item name="android:layout_marginTop">-20dp</item>
+    </style>
+
     <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">@dimen/dimen_14sp</item>
         <item name="fontFamily">@font/gilroy_semi_bold</item>

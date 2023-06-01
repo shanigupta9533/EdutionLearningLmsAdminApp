@@ -2,11 +2,9 @@
 <resources>
 
     <style name="drawer_item_text">
-        <item name="android:textSize">@dimen/dimen_13sp</item>
-        <item name="fontFamily">@font/gilroy_semi_bold</item>
-        <item name="android:alpha">0.8</item>
-        <item name="android:letterSpacing">0.02</item>
-        <item name="android:textColor">@color/blue_5A4BDA</item>
+        <item name="android:textSize">@dimen/dimen_15sp</item>
+        <item name="fontFamily">@font/gilroy_regular</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.edutionAdminLearning.core.result.getMessage
 import com.edutionAdminLearning.core.result.onFailure
 import com.edutionAdminLearning.core.result.onSuccess
+import com.edutionAdminLearning.core.result.toBasicUi
 import com.edutionAdminLearning.core_ui.viewmodel.BaseViewModel
 import com.edutionAdminLearning.edutionLearningAdmin.data.model.BannerData
 import com.edutionAdminLearning.edutionLearningAdmin.data.model.NotificationData
@@ -37,9 +38,6 @@ class HomeDetailsViewModel @Inject constructor(
     private val _userNotification = MutableSharedFlow<List<NotificationData>?>(extraBufferCapacity = 1)
     val userNotification = _userNotification.asSharedFlow()
 
-    private val _errorDetails = MutableSharedFlow<String?>(extraBufferCapacity = 1)
-    val errorDetails = _errorDetails.asSharedFlow()
-
     fun getBannersData(keywords: String) {
         startLoading()
         viewModelScope.launch {
@@ -50,6 +48,7 @@ class HomeDetailsViewModel @Inject constructor(
                 }
                 .onFailure {
                     stopLoading()
+                    it.toBasicUi().show()
                 }
         }
     }
@@ -64,8 +63,7 @@ class HomeDetailsViewModel @Inject constructor(
                 }
                 .onFailure { result ->
                     stopLoading()
-                    _respondSuccess.tryEmit(false)
-                    _errorDetails.tryEmit(result.getMessage())
+                    result.toBasicUi().show()
                 }
         }
     }
@@ -78,6 +76,7 @@ class HomeDetailsViewModel @Inject constructor(
                 stopLoading()
             }.onFailure {
                 stopLoading()
+                it.toBasicUi().show()
             }
         }
     }
@@ -91,6 +90,7 @@ class HomeDetailsViewModel @Inject constructor(
             }.onFailure {
                 _respondSuccess.tryEmit(false)
                 stopLoading()
+                it.toBasicUi().show()
             }
         }
     }
@@ -102,8 +102,8 @@ class HomeDetailsViewModel @Inject constructor(
                 _respondSuccess.tryEmit(true)
                 stopLoading()
             }.onFailure {
-                _respondSuccess.tryEmit(false)
                 stopLoading()
+                it.toBasicUi().show()
             }
         }
     }

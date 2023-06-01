@@ -23,7 +23,8 @@ class VideoDetailsMapper @Inject constructor() : Mapper<VideoDetails?, VideoDeta
                     videoName = it.videoName.value,
                     videoLink = it.videoLink.value,
                     isVideoPlaying = it.isVideoPlaying ?: false,
-                    timestamp = it.timestamp ?: "0"
+                    timestamp = it.timestamp ?: "0",
+                    displayOrder = it.displayOrder ?: "0"
                 )
             } ?: emptyList()
         )

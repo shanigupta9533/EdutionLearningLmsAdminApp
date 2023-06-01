@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="Integer" />
+            type="com.edutionAdminLearning.edutionLearningAdmin.data.model.PurchaseDetails" />
 
     </data>
 
@@ -37,7 +37,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="@dimen/dimen_12dp"
                 android:maxLines="2"
-                android:text="Android Development"
+                android:text="@{item.courseType}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 app:fontFamily="@font/gilroy_medium"

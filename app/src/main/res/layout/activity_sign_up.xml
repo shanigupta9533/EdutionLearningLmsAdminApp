@@ -26,29 +26,6 @@
                     android:adjustViewBounds="true"
                     android:src="@drawable/signup_app_icon" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_15ssp"
-                    android:layout_marginTop="10dp"
-                    android:alpha="0.8"
-                    android:fontFamily="@font/gilroy_bold"
-                    android:text="@string/create_account"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/dimen_18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_16ssp"
-                    android:layout_marginTop="@dimen/dimen_8dp"
-                    android:alpha="0.5"
-                    android:fontFamily="@font/gilroy_semi_bold"
-                    android:text="@string/sign_up_to_continue"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/dimen_13sp" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -62,7 +39,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:layout_marginTop="@dimen/_12ssp"
-                        android:text="@string/user_name"
+                        android:text="@string/admin_name"
                         android:textColor="@color/white"
                         android:fontFamily="@font/gilroy_semi_bold"
                         android:textSize="@dimen/dimen_16sp" />
@@ -225,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/gilroy_semi_bold"
-                        android:text="@string/sign_up"
+                        android:text="@string/create_admin"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen_15sp" />
 

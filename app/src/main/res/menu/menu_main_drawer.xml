@@ -7,31 +7,31 @@
 
         <item
             android:id="@+id/user_details"
-            android:icon="@drawable/chat_icon"
+            android:icon="@drawable/drawer_users"
             android:iconTint="@color/blue_5A4BDA"
             android:title="@string/users_details" />
 
         <item
             android:id="@+id/course_details"
-            android:icon="@drawable/chat_icon"
+            android:icon="@drawable/drawer_courses"
             android:iconTint="@color/blue_5A4BDA"
             android:title="@string/courseDetails" />
 
         <item
             android:id="@+id/banner_details"
-            android:icon="@drawable/enquiry_icon"
+            android:icon="@drawable/drawer_banners"
             android:iconTint="@color/blue_5A4BDA"
             android:title="@string/banner" />
 
         <item
             android:id="@+id/notification"
-            android:icon="@drawable/enquiry_icon"
+            android:icon="@drawable/bell_icon"
             android:iconTint="@color/blue_5A4BDA"
             android:title="@string/notification" />
 
         <item
             android:id="@+id/admin_access"
-            android:icon="@drawable/enquiry_icon"
+            android:icon="@drawable/drawer_admin_access"
             android:iconTint="@color/blue_5A4BDA"
             android:title="@string/admin_access" />
 

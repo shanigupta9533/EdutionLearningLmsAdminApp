@@ -6,6 +6,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="permission_denied_message">"If you denied this permission, you cannot use this feature\n Please turn on permissions at [App Setting] > [Permission]"</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -52,6 +53,7 @@
     <string name="browser_file">browser file</string>
     <string name="from_device">from device</string>
     <string name="submit_course_details">Submit Course Details</string>
+    <string name="submit_course_video_details">Submit Course Video Details</string>
     <string name="insert_course_details">Insert Course Details</string>
     <string name="course_videos_insert">Course Videos Insert</string>
     <string name="lecture_name">Lecture Name</string>
@@ -68,4 +70,44 @@
     <string name="submit_course_purchase_details">Submit Course Purchase Details</string>
     <string name="course_specification">Course Specification</string>
     <string name="add_new_item">Add New Item</string>
+    <string name="min_1_item_required">Min 1 item required…</string>
+    <string name="min_3_letter_is_required_in_specification_name">Min 3 letter is required in specification name…</string>
+    <string name="min_3_letter_required_in_course_type_field">Min 3 letter required in this field…</string>
+    <string name="min_10_letter_required_in_course_type_field">Min 10 letter required in this field…</string>
+    <string name="course_price_is_required">Course Price is required…</string>
+    <string name="image_size_should_be_less_than_1mb">Image size should be less than 1 mb.</string>
+    <string name="code_file_should_be_less_than_5mb">Code File should be less than 5 mb.</string>
+    <string name="home_work_should_be_less_than_5mb">Home Work should be less than 5 mb.</string>
+    <string name="project_file_should_be_less_than_3mb">Project File should be less than 3 mb.</string>
+    <string name="video_link_file_should_be_less_than_500mb">Video File should be less than 500 mb.</string>
+    <string name="something_went_wront_please_verify_your">Something Went Wrong Please Verify</string>
+    <string name="data_update_successfully">Data Update Successfully</string>
+    <string name="data_insert_successfully">Data Insert Successfully</string>
+    <string name="update_course_purchase_details">Update Course Purchase Details</string>
+    <string name="choose_a_image">Choose a image</string>
+    <string name="update_banner_details">Update Banner Details</string>
+    <string name="enter_starting_price">Enter Starting Price</string>
+    <string name="update_course_details">Update Course Details</string>
+    <string name="upload_successfully">Upload Successfully</string>
+    <string name="video_details">Video Details</string>
+    <string name="purchase_details">Purchase Details</string>
+    <string name="choose_a_code_file">Choose a code file</string>
+    <string name="choose_a_home_work_file">Choose a home work file</string>
+    <string name="choose_a_project_file">Choose a project file</string>
+    <string name="choose_a_video_file">Choose a video file</string>
+    <string name="update_course_video_details">Update Course Video Details</string>
+    <string name="display_order">Display Order</string>
+    <string name="display_order_should_not_be_empty">Display order should not be empty</string>
+    <string name="book_a_demo">Book Demo</string>
+    <string name="total_users">Total Users</string>
+    <string name="total_book_demo">Total Book Demo</string>
+    <string name="total_users_rating">Total Users Rating</string>
+    <string name="total_courses_sale">Total Courses Sale</string>
+    <string name="edution_landing_page">Edution Landing Page</string>
+    <string name="create_admin">Create Admin</string>
+    <string name="admin_name">Admin Name</string>
+    <string name="do_you_want_logout">Do you want to logout</string>
+    <string name="cancel">Cancel</string>
+    <string name="disable">Disable</string>
+    <string name="enable">Enable</string>
 </resources>

@@ -15,8 +15,8 @@ typealias GetPurchaseDetailsTimeLies = MyResult<List<PurchaseDetails>?, Complete
 class PurchaseDetailUseCase @Inject constructor(
     private val lmsEdutionDataSource: LmsEdutionDataSource,
     private val purchaseDetailsMapper: PurchaseDetailsMapper
-) : UseCaseSuspend<Unit, GetPurchaseDetailsTimeLies> {
-    override suspend fun invoke(params: Unit): GetPurchaseDetailsTimeLies {
-        return lmsEdutionDataSource.getPurchaseDetails().map(purchaseDetailsMapper::dtoToDomain)
+) : UseCaseSuspend<String, GetPurchaseDetailsTimeLies> {
+    override suspend fun invoke(params: String): GetPurchaseDetailsTimeLies {
+        return lmsEdutionDataSource.getPurchaseDetails(params).map(purchaseDetailsMapper::dtoToDomain)
     }
 }

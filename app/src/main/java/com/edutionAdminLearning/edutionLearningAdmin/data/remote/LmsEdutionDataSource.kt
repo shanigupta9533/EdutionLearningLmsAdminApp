@@ -19,8 +19,9 @@ interface LmsEdutionDataSource {
     suspend fun getSignupResponse(submitDto: SignUpSubmitDto): MyResult<UserDetailsResponseDto?, CompleteApiError<Error>>
     suspend fun getLoginResponse(loginSubmitDto: LoginSubmitDto): MyResult<UserDetailsResponseDto?, CompleteApiError<Error>>
     suspend fun coursesDetails(): MyResult<List<CourseDetailDto>, CompleteApiError<Error>>
+    suspend fun coursesUpdateLive(courseId: String): MyResult<Unit, CompleteApiError<Error>>
     suspend fun coursesDetailsDelete(params: String): MyResult<Unit, CompleteApiError<Error>>
-    suspend fun getPurchaseDetails(): MyResult<List<PurchaseDetailsDto>, CompleteApiError<Error>>
+    suspend fun getPurchaseDetails(params: String): MyResult<List<PurchaseDetailsDto>, CompleteApiError<Error>>
     suspend fun getPurchaseSubmit(purchaseSubmitDto: PurchaseSubmitDto): MyResult<Unit, CompleteApiError<Error>>
     suspend fun getPurchaseUpdate(purchaseId: String, purchaseDetailsUpdateDto: PurchaseDetailsUpdateDto): MyResult<Unit, CompleteApiError<Error>>
     suspend fun purchaseDelete(purchaseId: String): MyResult<Unit, CompleteApiError<Error>>
@@ -31,5 +32,7 @@ interface LmsEdutionDataSource {
     suspend fun notificationDelete(notificationId: String): MyResult<Unit, CompleteApiError<Error>>
     suspend fun getVideoDetails(courseId: String): MyResult<VideoDetailsDto?, CompleteApiError<Error>>
     suspend fun videoDeleteDetails(videoId: String): MyResult<Unit, CompleteApiError<Error>>
+    suspend fun getUserSplash(): MyResult<UserDetailsResponseDto?, CompleteApiError<Error>>
+    suspend fun userLogout(): MyResult<UserDetailsResponseDto, CompleteApiError<Error>>
 
 }

@@ -10,6 +10,10 @@ android {
     namespace 'com.edutionAdminLearning.network'
     compileSdk 33
 
+    sourceSets {
+        main.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
     defaultConfig {
         minSdk 23
         targetSdk 33
@@ -27,17 +31,22 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", '"http://192.168.112.206:8000"'
+            buildConfigField "String", "BASE_URL", '"https://www.edutions.in/edutionLearningLms/"'
             buildConfigField "String", "ONE_SIGNAL_APP_ID", '"43ab056f-6069-4bf9-ba12-395b495dbb19"'
         }
 
         debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", '"http://192.168.112.206:8000"'
+            buildConfigField "String", "BASE_URL", '"https://www.edutions.in/edutionLearningLms/"'
             buildConfigField "String", "ONE_SIGNAL_APP_ID", '"43ab056f-6069-4bf9-ba12-395b495dbb19"'
         }
 
+    }
+
+    sourceSets {
+        androidTest.assets.srcDirs +=
+                files("$projectDir/schemas".toString())
     }
 
     compileOptions {
@@ -81,5 +90,6 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:$okHttp"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation "net.gotev:uploadservice:$gotevUploadService"
 
 }

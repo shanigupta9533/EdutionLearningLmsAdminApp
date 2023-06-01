@@ -1,15 +1,27 @@
 package com.edutionAdminLearning.edutionLearningAdmin.activity
 
 import android.app.Dialog
+import android.content.Intent
+import android.os.Build
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import com.edutionAdminLearning.core.network.NetworkCallStatus
 import com.edutionAdminLearning.core_ui.activity.PWViewBindingActivity
 import com.edutionAdminLearning.core_ui.view.dialog.ProgressCustomDialog
 import com.edutionAdminLearning.edutionLearningAdmin.R
 import com.edutionAdminLearning.edutionLearningAdmin.databinding.ActivityMainBinding
 import com.edutionAdminLearning.edutionLearningAdmin.fragment.StartLandingFragment
+import com.edutionAdminLearning.edutionLearningAdmin.utils.checkNotificationPermission
+import com.edutionAdminLearning.edutionLearningAdmin.viewmodel.AdminDetailsViewModel
+import com.edutionAdminLearning.network.managers.NetworkManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : PWViewBindingActivity<ActivityMainBinding>(
@@ -17,6 +29,10 @@ class MainActivity : PWViewBindingActivity<ActivityMainBinding>(
 ) {
 
     private var pDialog: Dialog? = null
+    val viewModel: AdminDetailsViewModel by viewModels()
+
+    @Inject
+    lateinit var networkManager: NetworkManager
 
     private val navHost by lazy {
         supportFragmentManager
@@ -29,6 +45,19 @@ class MainActivity : PWViewBindingActivity<ActivityMainBinding>(
 
     override fun ActivityMainBinding.setViewBindingVariables() {
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            checkNotificationPermission(onGranted = {
+            }, onPermissionDenied = {
+            })
+        }
+
+        lifecycleScope.launch {
+            NetworkCallStatus.onServerDown.collect {
+                if (it)
+                    Toast.makeText(this@MainActivity, "server is down...", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         navView.setNavigationItemSelectedListener {
 
             when (it.itemId) {
@@ -40,29 +69,51 @@ class MainActivity : PWViewBindingActivity<ActivityMainBinding>(
                 R.id.course_details -> {
                     AppNavigationActivity.start(
                         context = this@MainActivity,
-                        fwdLocation = StartLandingFragment.FWD_LOCATION_COURSES)
+                        fwdLocation = StartLandingFragment.FWD_LOCATION_COURSES
+                    )
                 }
 
                 R.id.banner_details -> {
                     AppNavigationActivity.start(
                         context = this@MainActivity,
-                        fwdLocation = StartLandingFragment.FWD_LOCATION_BANNERS)
+                        fwdLocation = StartLandingFragment.FWD_LOCATION_BANNERS
+                    )
                 }
 
                 R.id.notification -> {
                     AppNavigationActivity.start(
                         context = this@MainActivity,
-                        fwdLocation = StartLandingFragment.FWD_LOCATION_NOTIFICATION)
+                        fwdLocation = StartLandingFragment.FWD_LOCATION_NOTIFICATION
+                    )
                 }
 
                 R.id.admin_access -> {
                     AppNavigationActivity.start(
                         context = this@MainActivity,
-                        fwdLocation = StartLandingFragment.FWD_LOCATION_ADMIN_ACCESS)
+                        fwdLocation = StartLandingFragment.FWD_LOCATION_ADMIN_ACCESS
+                    )
                 }
 
                 R.id.logout -> {
-                    showProgressBar(getString(R.string.please_wait))
+
+                    val builder = AlertDialog.Builder(this@MainActivity)
+                    builder.setTitle(R.string.do_you_want_logout)
+                    builder.setPositiveButton(R.string.logout) { dialogInterface, i ->
+                        showProgressBar(getString(R.string.please_wait))
+                        lifecycleScope.launch {
+                            viewModel.getUserLogout()?.let {
+                                hideProgress()
+                                networkManager.loginManager?.logout()
+                                Intent(this@MainActivity, LoginActivity::class.java).apply {
+                                    startActivity(this)
+                                    finishAffinity()
+                                }
+                            }
+                        }
+                    }
+                    builder.setNegativeButton(getString(R.string.cancel)) { dialogInterface, i -> dialogInterface.dismiss() }
+                    val dialog = builder.create()
+                    dialog.show()
                 }
 
             }

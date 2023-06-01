@@ -8,7 +8,7 @@ object NetworkHeaders  {
     const val APP_VERSION_NAME = "APP_VERSION_NAME"
     const val PACKAGE_NAME = "PACKAGE_NAME"
     const val CONTENT_TYPE = "Content-Type"
-    const val ACCEPT_TYPE = "Accept"
+    const val ACCEPT_TYPE = "accept"
     const val DEVICE_TYPE_VALUE = "MOBILE"
     const val REFERER = "referer"
     const val ANDROID_LIVE = "android.pw.live"

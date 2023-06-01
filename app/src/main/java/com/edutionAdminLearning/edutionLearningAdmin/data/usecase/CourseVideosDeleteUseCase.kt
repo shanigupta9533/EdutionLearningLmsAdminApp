@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 typealias GetCoursesDeleteTimeLies = MyResult<Unit, CompleteApiError<Error>>
 
-class CoursesDeleteUseCase @Inject constructor(
+class CourseVideosDeleteUseCase @Inject constructor(
     private val lmsEdutionDataSource: LmsEdutionDataSource,
 ) : UseCaseSuspend<String, GetCoursesDeleteTimeLies> {
     override suspend fun invoke(params: String): GetCoursesDeleteTimeLies {

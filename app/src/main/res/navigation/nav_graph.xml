@@ -9,6 +9,16 @@
         android:id="@+id/edutionLandingFragment"
         tools:layout="@layout/fragment_edution_landing"
         android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.EdutionLandingFragment"
-        android:label="HomePageFragment" />
+        android:label="HomePageFragment" >
+        <action
+            android:id="@+id/action_edutionLandingFragment_to_edutionHomeFragment"
+            app:destination="@id/edutionHomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/edutionHomeFragment"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.EdutionHomeFragment"
+        android:label="fragment_edution_home"
+        tools:layout="@layout/fragment_edution_home" />
 
 </navigation>

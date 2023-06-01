@@ -11,6 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 
 
@@ -34,7 +35,8 @@ open class BaseService protected constructor(
         httpClient.readTimeout(120, TimeUnit.SECONDS)
         httpClient.addInterceptor(Interceptor { chain: Interceptor.Chain ->
             val request = networkUtils.getRequest(chain.request(), authToken)
-            chain.proceed(request)
+            NetworkCallStatus.postServerDown(false)
+            chain.proceed(request = request)
         })
         if (com.edutionAdminLearning.core.BuildConfig.DEBUG) {
             val mLogging = HttpLoggingInterceptor()

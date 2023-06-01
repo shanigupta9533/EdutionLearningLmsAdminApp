@@ -9,6 +9,16 @@
             name="toolbarText"
             type="String" />
 
+        <variable
+            name="controller"
+            type="com.edutionAdminLearning.edutionLearningAdmin.fragment.CourseVideosInsertFragment" />
+
+        <variable
+            name="vm"
+            type="com.edutionAdminLearning.edutionLearningAdmin.viewmodel.CourseDetailsViewModel" />
+
+        <import type="android.view.View"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,110 +33,140 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_height="0dp">
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:orientation="vertical"
+                android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginEnd="@dimen/dp_20"
-                android:layout_height="match_parent">
+                android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    app:shapeAppearance="@style/Cut"
                     android:layout_marginTop="@dimen/dimen_20dp"
+                    android:background="@color/white"
                     android:hint="@string/lecture_name"
-                    app:hintTextColor="@color/grey_888888">
+                    app:hintTextColor="@color/grey_888888"
+                    app:shapeAppearance="@style/Cut">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/lecture_name"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/gilroy_medium"
-                        android:id="@+id/course_name"
-                        android:textSize="@dimen/dimen_14sp"
-                        android:layout_height="wrap_content" />
+                        android:textSize="@dimen/dimen_14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:background="@color/white"
+                    android:hint="@string/display_order"
+                    app:hintTextColor="@color/grey_888888"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    app:shapeAppearance="@style/Cut">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/display_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:textSize="@dimen/dimen_14sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/code_link"
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:background="@drawable/round_upload_section_design"
-                    android:layout_marginTop="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_130"
                     android:layout_marginStart="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dp_35"
                     android:layout_marginEnd="@dimen/dimen_30dp"
-                    android:layout_height="@dimen/dp_130">
+                    android:background="@drawable/round_upload_section_design"
+                    android:onClick="@{()->controller.videoLink()}"
+                    android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="@dimen/dp_35"
                         android:layout_height="@dimen/dp_35"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dp_14"
                         android:alpha="0.5"
-                        android:layout_gravity="center"
                         android:src="@drawable/ic_file_upload_icon" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/video_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:layout_marginEnd="@dimen/dimen_12dp"
+                        android:layout_marginTop="@dimen/dimen_12dp"
                         android:text="@string/drag_amp_drop_video"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:fontFamily="@font/gilroy_medium"
-                        android:layout_marginTop="@dimen/dimen_12dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textSize="@dimen/dimen_15sp"
                         android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_15sp"
+                        app:fontFamily="@font/gilroy_medium"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dimen_12dp"
-                        android:layout_height="wrap_content">
+                        android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/or"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_12sp"
                             app:fontFamily="@font/gilroy_medium"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_12sp"
-                            android:textColor="@color/black"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp_3"
                             android:text="@string/browser_file"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
-                            android:layout_marginStart="@dimen/dp_3"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_14sp"
                             android:textColor="@color/quantum_purple500"
+                            android:textSize="@dimen/dimen_14sp"
+                            app:fontFamily="@font/gilroy_medium"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:text="@string/from_device"
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
+                            android:layout_gravity="center"
                             android:layout_marginStart="@dimen/dp_3"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_12sp"
+                            android:text="@string/from_device"
                             android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_12sp"
+                            app:fontFamily="@font/gilroy_medium"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -135,77 +175,84 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/home_work_link"
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:background="@drawable/round_upload_section_design"
-                    android:layout_marginTop="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_130"
                     android:layout_marginStart="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dp_35"
                     android:layout_marginEnd="@dimen/dimen_30dp"
-                    android:layout_height="@dimen/dp_130">
+                    android:background="@drawable/round_upload_section_design"
+                    android:onClick="@{()->controller.homeWorkLink()}"
+                    android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="@dimen/dp_35"
                         android:layout_height="@dimen/dp_35"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dp_14"
                         android:alpha="0.5"
-                        android:layout_gravity="center"
                         android:src="@drawable/ic_file_upload_icon" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/home_work_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dimen_12dp"
                         android:text="@string/drag_amp_drop_home_work_pdf"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:fontFamily="@font/gilroy_medium"
-                        android:layout_marginTop="@dimen/dimen_12dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textSize="@dimen/dimen_15sp"
                         android:textColor="@color/black"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:layout_marginEnd="@dimen/dimen_12dp"
+                        android:textSize="@dimen/dimen_15sp"
+                        app:fontFamily="@font/gilroy_medium"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dimen_12dp"
-                        android:layout_height="wrap_content">
+                        android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/or"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_12sp"
                             app:fontFamily="@font/gilroy_medium"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_12sp"
-                            android:textColor="@color/black"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp_3"
                             android:text="@string/browser_file"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
-                            android:layout_marginStart="@dimen/dp_3"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_14sp"
                             android:textColor="@color/quantum_purple500"
+                            android:textSize="@dimen/dimen_14sp"
+                            app:fontFamily="@font/gilroy_medium"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:text="@string/from_device"
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
+                            android:layout_gravity="center"
                             android:layout_marginStart="@dimen/dp_3"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_12sp"
+                            android:text="@string/from_device"
                             android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_12sp"
+                            app:fontFamily="@font/gilroy_medium"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -214,77 +261,84 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/project_link"
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:background="@drawable/round_upload_section_design"
-                    android:layout_marginTop="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_130"
                     android:layout_marginStart="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dp_35"
                     android:layout_marginEnd="@dimen/dimen_30dp"
-                    android:layout_height="@dimen/dp_130">
+                    android:background="@drawable/round_upload_section_design"
+                    android:onClick="@{()->controller.projectLink()}"
+                    android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="@dimen/dp_35"
                         android:layout_height="@dimen/dp_35"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dp_14"
                         android:alpha="0.5"
-                        android:layout_gravity="center"
                         android:src="@drawable/ic_file_upload_icon" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/project_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dimen_12dp"
                         android:text="@string/drag_amp_drop_project_pdf"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:fontFamily="@font/gilroy_medium"
-                        android:layout_marginTop="@dimen/dimen_12dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textSize="@dimen/dimen_15sp"
                         android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_15sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:layout_marginEnd="@dimen/dimen_12dp"
+                        app:fontFamily="@font/gilroy_medium"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dimen_12dp"
-                        android:layout_height="wrap_content">
+                        android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/or"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_12sp"
                             app:fontFamily="@font/gilroy_medium"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_12sp"
-                            android:textColor="@color/black"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp_3"
                             android:text="@string/browser_file"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
-                            android:layout_marginStart="@dimen/dp_3"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_14sp"
                             android:textColor="@color/quantum_purple500"
+                            android:textSize="@dimen/dimen_14sp"
+                            app:fontFamily="@font/gilroy_medium"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:text="@string/from_device"
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
+                            android:layout_gravity="center"
                             android:layout_marginStart="@dimen/dp_3"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_12sp"
+                            android:text="@string/from_device"
                             android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_12sp"
+                            app:fontFamily="@font/gilroy_medium"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -293,77 +347,84 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/video_link"
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:background="@drawable/round_upload_section_design"
-                    android:layout_marginTop="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_130"
                     android:layout_marginStart="@dimen/dimen_20dp"
+                    android:layout_marginTop="@dimen/dp_35"
                     android:layout_marginEnd="@dimen/dimen_30dp"
-                    android:layout_height="@dimen/dp_130">
+                    android:background="@drawable/round_upload_section_design"
+                    android:onClick="@{()->controller.codeLink()}"
+                    android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="@dimen/dp_35"
                         android:layout_height="@dimen/dp_35"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dp_14"
                         android:alpha="0.5"
-                        android:layout_gravity="center"
                         android:src="@drawable/ic_file_upload_icon" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:text="@string/drag_amp_drop_code_file"
-                        android:layout_gravity="center"
+                        android:id="@+id/code_link_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:fontFamily="@font/gilroy_medium"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dimen_12dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textSize="@dimen/dimen_15sp"
+                        android:text="@string/drag_amp_drop_code_file"
                         android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_15sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:layout_marginEnd="@dimen/dimen_12dp"
+                        app:fontFamily="@font/gilroy_medium"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/dimen_12dp"
-                        android:layout_height="wrap_content">
+                        android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/or"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_12sp"
                             app:fontFamily="@font/gilroy_medium"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_12sp"
-                            android:textColor="@color/black"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dp_3"
                             android:text="@string/browser_file"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
-                            android:layout_marginStart="@dimen/dp_3"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_14sp"
                             android:textColor="@color/quantum_purple500"
+                            android:textSize="@dimen/dimen_14sp"
+                            app:fontFamily="@font/gilroy_medium"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:text="@string/from_device"
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
+                            android:layout_gravity="center"
                             android:layout_marginStart="@dimen/dp_3"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_12sp"
+                            android:text="@string/from_device"
                             android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_12sp"
+                            app:fontFamily="@font/gilroy_medium"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -375,14 +436,15 @@
                     android:id="@+id/submit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_32"
                     android:fontFamily="@font/gilroy_bold"
                     android:letterSpacing="0"
+                    android:onClick="@{()->controller.submitData()}"
                     android:paddingHorizontal="@dimen/dimen_30dp"
                     android:paddingVertical="@dimen/dimen_13dp"
-                    android:text="@string/submit_course_details"
+                    android:text="@string/submit_course_video_details"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:layout_marginTop="@dimen/dp_32"
                     android:textSize="@dimen/sp_14"
                     app:backgroundTint="@color/button_selector"
                     app:cornerRadius="@dimen/dimen_12dp"
@@ -394,6 +456,14 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.core.widget.NestedScrollView>
+
+        <include layout="@layout/progress_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:visibility="@{vm.loading ? View.VISIBLE : View.GONE}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

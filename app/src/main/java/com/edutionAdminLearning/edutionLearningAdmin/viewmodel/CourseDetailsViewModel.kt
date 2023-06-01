@@ -2,8 +2,10 @@ package com.edutionAdminLearning.edutionLearningAdmin.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.edutionAdminLearning.core.result.getMessage
+import com.edutionAdminLearning.core.result.getWarningType
 import com.edutionAdminLearning.core.result.onFailure
 import com.edutionAdminLearning.core.result.onSuccess
+import com.edutionAdminLearning.core.result.toBasicUi
 import com.edutionAdminLearning.core_ui.viewmodel.BaseViewModel
 import com.edutionAdminLearning.edutionLearningAdmin.data.dto.PurchaseSubmitDto
 import com.edutionAdminLearning.edutionLearningAdmin.data.model.CoursesDetailsData
@@ -11,6 +13,8 @@ import com.edutionAdminLearning.edutionLearningAdmin.data.model.CoursesVideo
 import com.edutionAdminLearning.edutionLearningAdmin.data.model.PurchaseDetails
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.CourseDetailDeleteUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.CourseDetailUseCase
+import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.CourseUpdateLiveUseCase
+import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.CourseVideosDeleteUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.GetVideoDetailsUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.PurchaseDetailUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.PurchaseDetailsDeleteUseCase
@@ -34,11 +38,12 @@ class CourseDetailsViewModel @Inject constructor(
     private val purchaseDetailsUpdateUseCase: PurchaseDetailsUpdateUseCase,
     private val purchaseDetailsDeleteUseCase: PurchaseDetailsDeleteUseCase,
     private val videoDetailsUseCase: GetVideoDetailsUseCase,
-    private val courseVideoDeleteUseCase: CourseDetailDeleteUseCase
+    private val courseVideoDeleteUseCase: CourseVideosDeleteUseCase,
+    private val courseUpdateLiveUseCase: CourseUpdateLiveUseCase
 ) : BaseViewModel() {
 
-    private val _getAllCourses = MutableStateFlow<List<CoursesDetailsData>?>(null)
-    val getAllCourses = _getAllCourses.asStateFlow()
+    private val _getAllCourses = MutableSharedFlow<List<CoursesDetailsData>?>(extraBufferCapacity = 1)
+    val getAllCourses = _getAllCourses.asSharedFlow()
 
     private val _coursesVideoPlayer = MutableSharedFlow<List<CoursesVideo>>(extraBufferCapacity = 1)
     val coursesVideoPlayer = _coursesVideoPlayer.asSharedFlow()
@@ -65,42 +70,41 @@ class CourseDetailsViewModel @Inject constructor(
             courseDetailUseCase(Unit)
                 .onSuccess {
                     stopLoading()
-                    it?.let { _getAllCourses.value = it }
+                    it?.let { _getAllCourses.tryEmit(it) }
                 }
-                .onFailure { result ->
+                .onFailure {
                     stopLoading()
-                    _errorDetails.tryEmit(result.getMessage())
+                    it.toBasicUi().show()
                 }
         }
     }
 
-    fun deleteCourseDetails() {
+    fun deleteCourseDetails(courseId: String) {
         startLoading()
         viewModelScope.launch {
-            courseDetailUseCase(Unit)
+            courseDetailDeleteUseCase(courseId)
                 .onSuccess {
                     stopLoading()
                     _respondSuccess.tryEmit(true)
                 }
-                .onFailure { result ->
+                .onFailure {
                     stopLoading()
-                    _respondSuccess.tryEmit(false)
-                    _errorDetails.tryEmit(result.getMessage())
+                    it.toBasicUi().show()
                 }
         }
     }
 
-    fun getAllPurchaseDetails() {
+    fun getAllPurchaseDetails(courseId: String) {
         startLoading()
         viewModelScope.launch {
-            purchaseDetailUseCase(Unit)
+            purchaseDetailUseCase(courseId)
                 .onSuccess {
                     stopLoading()
                     _getAllPurchaseDetails.tryEmit(it)
                 }
-                .onFailure { result ->
+                .onFailure {
                     stopLoading()
-                    _errorDetails.tryEmit(result.getMessage())
+                    it.toBasicUi().show()
                 }
         }
     }
@@ -113,10 +117,9 @@ class CourseDetailsViewModel @Inject constructor(
                     stopLoading()
                     _respondSuccess.tryEmit(true)
                 }
-                .onFailure { result ->
+                .onFailure {
                     stopLoading()
-                    _respondSuccess.tryEmit(false)
-                    _errorDetails.tryEmit(result.getMessage())
+                    it.toBasicUi().show()
                 }
         }
     }
@@ -129,10 +132,9 @@ class CourseDetailsViewModel @Inject constructor(
                     stopLoading()
                     _respondSuccess.tryEmit(true)
                 }
-                .onFailure { result ->
+                .onFailure {
                     stopLoading()
-                    _respondSuccess.tryEmit(false)
-                    _errorDetails.tryEmit(result.getMessage())
+                    it.toBasicUi().show()
                 }
         }
     }
@@ -145,10 +147,9 @@ class CourseDetailsViewModel @Inject constructor(
                     stopLoading()
                     _respondSuccess.tryEmit(true)
                 }
-                .onFailure { result ->
+                .onFailure {
                     stopLoading()
-                    _respondSuccess.tryEmit(false)
-                    _errorDetails.tryEmit(result.getMessage())
+                    it.toBasicUi().show()
                 }
         }
     }
@@ -161,10 +162,9 @@ class CourseDetailsViewModel @Inject constructor(
                     stopLoading()
                     _respondSuccess.tryEmit(true)
                 }
-                .onFailure { result ->
+                .onFailure {
                     stopLoading()
-                    _respondSuccess.tryEmit(false)
-                    _errorDetails.tryEmit(result.getMessage())
+                    it.toBasicUi().show()
                 }
         }
     }
@@ -176,6 +176,7 @@ class CourseDetailsViewModel @Inject constructor(
                 stopLoading()
                 _coursesVideoPlayer.tryEmit(it?.courseVideo ?: emptyList())
             }.onFailure {
+                it.toBasicUi().show()
                 stopLoading()
             }
         }
@@ -188,11 +189,23 @@ class CourseDetailsViewModel @Inject constructor(
                 stopLoading()
                 _respondSuccess.tryEmit(true)
             }.onFailure {
-                _respondSuccess.tryEmit(false)
+                it.toBasicUi().show()
                 stopLoading()
             }
         }
     }
 
+    fun updateCourseUpdateLive(courseId: String) {
+        startLoading()
+        viewModelScope.launch {
+            courseUpdateLiveUseCase(courseId).onSuccess {
+                stopLoading()
+                _respondSuccess.tryEmit(true)
+            }.onFailure {
+                it.toBasicUi().show()
+                stopLoading()
+            }
+        }
+    }
 
 }

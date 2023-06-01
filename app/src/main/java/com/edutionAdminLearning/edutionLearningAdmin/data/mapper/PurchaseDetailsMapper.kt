@@ -12,13 +12,13 @@ class PurchaseDetailsMapper @Inject constructor() : Mapper<PurchaseDetails, Purc
         return PurchaseDetails(
             courseId = dto.courseId.value,
             courseType = dto.courseType.value,
-            id = dto.id ?: 0,
+            id = dto.id ?: "0",
             price = dto.price.value,
             purchaseSpec = dto.purchaseSpec?.map {
                 PurchaseSpec(
                     available = it?.available ?: false,
                     courseTypeId = it?.courseTypeId.value,
-                    id = it?.id ?: 0,
+                    id = it?.id ?: "0",
                     specName = it?.specName.value
                 )
             } ?: emptyList()

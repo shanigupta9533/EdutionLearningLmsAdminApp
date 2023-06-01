@@ -21,8 +21,7 @@ fun <T> Response<T>.getError(): CompleteApiError<Any?> = try {
     when {
         code() in 200 .. 300 -> NoError
         // code().isUnauthorized() -> UnauthorizedError
-        code() in 400..499 -> this.getExpectedError()
-        code() in 500..599 -> ServerApiError
+        code() in 400..599 -> this.getExpectedError()
         !isSuccessful -> ServerApiError
         else -> UnknownApiError
     }

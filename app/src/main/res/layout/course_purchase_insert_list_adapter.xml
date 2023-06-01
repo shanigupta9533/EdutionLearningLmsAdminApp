@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="purchaseSpec"
-            type="com.edutionAdminLearning.edutionLearningAdmin.data.model.PurchasedSpecSubmitDto" />
+            name="item"
+            type="com.edutionAdminLearning.edutionLearningAdmin.data.model.PurchasedSpecSubmit" />
 
     </data>
 
@@ -35,6 +35,7 @@
                 android:fontFamily="@font/gilroy_medium"
                 android:id="@+id/course_spec"
                 android:textSize="@dimen/dimen_14sp"
+                android:text="@{item.specName}"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -45,6 +46,7 @@
             android:buttonTint="@color/blue_5A4BDA"
             android:gravity="center"
             android:id="@+id/availability"
+            android:checked="@{item.available}"
             app:layout_constraintEnd_toStartOf="@+id/delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -29,17 +29,15 @@
             android:minHeight="@dimen/dp_55">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/dp_6"
-                android:layout_height="@dimen/dp_6"
-                android:layout_marginEnd="@dimen/dimen_12dp"
-                app:cardElevation="@dimen/dimen_0dp"
-                goneUnless="@{item.live}"
                 android:id="@+id/green_dot"
-                app:cardBackgroundColor="@color/quantum_googgreen300"
-                app:cardCornerRadius="@dimen/dimen_12dp"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_marginStart="@dimen/dimen_12dp"
+                app:cardBackgroundColor="@{item.live ? @color/quantum_googgreen300 : @color/quantum_grey300}"
+                app:cardCornerRadius="@dimen/dimen_30dp"
+                app:cardElevation="@dimen/dimen_0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                 android:layout_marginStart="@dimen/dimen_12dp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView

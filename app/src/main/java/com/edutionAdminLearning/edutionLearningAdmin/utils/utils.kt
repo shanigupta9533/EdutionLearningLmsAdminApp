@@ -1,13 +1,22 @@
 package com.edutionAdminLearning.edutionLearningAdmin.utils
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.activity.result.ActivityResultLauncher
+import androidx.fragment.app.FragmentActivity
+import com.edutionAdminLearning.core.type.EMPTY
 import com.edutionAdminLearning.core_ui.extensions.toastL
+import com.edutionAdminLearning.edutionLearningAdmin.R
+import com.google.android.exoplayer2.util.FileTypes.MP4
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.firstOrNull
@@ -15,6 +24,9 @@ import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.UUID
+
+val IMAGE_EXTENSIONS = arrayOf("image/jpg", "image/png", "image/gif", "image/jpeg", "image/webp")
 
 inline fun <reified T : Parcelable> Bundle.parcelableArrayList(key: String): ArrayList<T>? = when {
     SDK_INT >= 33 -> getParcelableArrayList(key, T::class.java)
@@ -35,6 +47,10 @@ fun <T> SharedFlow<T>.getValueBlockedOrNull(): T? {
         }
     }
     return value
+}
+
+fun uniqueId(): String {
+    return UUID.randomUUID().toString().replace("-", String.EMPTY).uppercase(Locale.ROOT)
 }
 
 fun Context.whatsAppLaunch(contact: String, shareText: String) {
@@ -65,6 +81,75 @@ fun String.setStringTimeStampWithDate(): Long {
     return mDate?.time ?: 0
 }
 
+fun Context.makeStoragePermission(
+    mimetypes: Array<String>, startLaunch: ActivityResultLauncher<Intent>
+) {
+    checkStoragePermission({
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.type = "*/*"
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes)
+        startLaunch.launch(intent)
+    }) {
+
+    }
+}
+
+fun Context.checkStoragePermission(onGranted: () -> Unit, onPermissionDenied: () -> Unit) {
+    val tedPermission = TedPermission.create().setPermissionListener(object : PermissionListener {
+        override fun onPermissionGranted() {
+            onGranted()
+        }
+
+        override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+            onPermissionDenied()
+        }
+    }).setDeniedMessage(getString(R.string.permission_denied_message))
+
+    return if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        tedPermission.setPermissions(
+            Manifest.permission.READ_MEDIA_VIDEO, Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_AUDIO
+        ).check()
+    } else if (SDK_INT >= Build.VERSION_CODES.Q) {
+        tedPermission.setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE).check()
+    } else {
+        tedPermission.setPermissions(
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ).check()
+    }
+
+}
+
+fun Context.checkNotificationPermission(onGranted: () -> Unit, onPermissionDenied: () -> Unit) {
+    val tedPermission = TedPermission.create().setPermissionListener(object : PermissionListener {
+        override fun onPermissionGranted() {
+            onGranted()
+        }
+
+        override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+            onPermissionDenied()
+        }
+    }).setDeniedMessage(getString(R.string.permission_denied_message))
+
+    tedPermission.setPermissions(
+        Manifest.permission.POST_NOTIFICATIONS
+    ).check()
+
+}
+
+internal val mimeTypesOfPdf = arrayOf(
+    "application/pdf",
+)
+
+internal val mimeTypesOfEverything = arrayOf(
+    "*/*",
+)
+
+internal val mimeTypesOfVideo = arrayOf(
+    "video/mp4",
+    "video/webm",
+    "video/mpeg"
+)
 
 private fun Context.whatsAppBusinessLaunch(contact: String, shareText: String) {
 

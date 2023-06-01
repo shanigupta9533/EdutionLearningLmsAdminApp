@@ -9,6 +9,16 @@
             name="toolbarText"
             type="String" />
 
+        <variable
+            name="vm"
+            type="com.edutionAdminLearning.edutionLearningAdmin.viewmodel.HomeDetailsViewModel" />
+
+        <variable
+            name="controller"
+            type="com.edutionAdminLearning.edutionLearningAdmin.fragment.NotificationInsertFragment" />
+
+        <import type="android.view.View"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +59,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:fontFamily="@font/gilroy_medium"
-                        android:id="@+id/course_desc"
+                        android:id="@+id/notification_field"
                         android:minLines="3"
                         android:maxLines="5"
                         android:gravity="top"
@@ -68,6 +78,7 @@
                     android:paddingVertical="@dimen/dimen_13dp"
                     android:text="@string/submit_notification"
                     android:textAllCaps="false"
+                    android:onClick="@{()->controller.clickToAction()}"
                     android:textColor="@color/white"
                     android:layout_marginTop="@dimen/dp_32"
                     android:textSize="@dimen/sp_14"
@@ -81,6 +92,14 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.core.widget.NestedScrollView>
+
+        <include layout="@layout/progress_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:visibility="@{vm.loading ? View.VISIBLE : View.GONE}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

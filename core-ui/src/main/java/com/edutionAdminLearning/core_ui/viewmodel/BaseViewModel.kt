@@ -6,6 +6,7 @@ import com.edutionAdminLearning.core.result.CompleteUiApiError
 import com.edutionAdminLearning.core.result.UiApiError
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import com.edutionAdminLearning.core.result.Error
 
 abstract class BaseViewModel : ViewModel() {
 

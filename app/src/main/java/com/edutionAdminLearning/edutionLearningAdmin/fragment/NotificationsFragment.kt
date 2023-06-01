@@ -5,11 +5,15 @@ import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.edutionAdminLearning.core_ui.adapter.GenericRecyclerViewAdapter
 import com.edutionAdminLearning.core_ui.fragment.ViewModelBindingFragment
 import com.edutionAdminLearning.edutionLearningAdmin.R
+import com.edutionAdminLearning.edutionLearningAdmin.data.model.NotificationData
 import com.edutionAdminLearning.edutionLearningAdmin.databinding.FragmentNotificationsBinding
 import com.edutionAdminLearning.edutionLearningAdmin.databinding.NotificationListAdapterFragmentBinding
+import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants
+import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.REFRESH_TIME
 import com.edutionAdminLearning.edutionLearningAdmin.viewmodel.HomeDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -25,24 +29,47 @@ class NotificationsFragment : ViewModelBindingFragment<FragmentNotificationsBind
 
     override fun FragmentNotificationsBinding.setViewBindingVariables() {
         toolbarText = getString(R.string.notification_details)
+        vm = viewModel
     }
 
     override fun FragmentNotificationsBinding.setViewModelBindingData() {
+        lifecycleOwner = viewLifecycleOwner
         recyclerView.adapter = adapter
-        adapter.submitList((0..20).toList())
 
-        swipeLayout.setOnRefreshListener {
-            viewLifecycleScope?.launch {
-                delay(3000)
-                swipeLayout.isRefreshing = false
-            }
-        }
-
+        viewModel.getNotification()
         toolbar.addIcon.setOnClickListener {
             findNavController().navigate(
                 NotificationsFragmentDirections.goToNotificationInsert()
             )
         }
+
+        viewLifecycleScope?.launch {
+            viewModel.respondSuccess.collect {
+                if (it) {
+                    viewModel.getNotification()
+                }
+            }
+        }
+
+        viewLifecycleScope?.launch {
+            viewModel.userNotification.collect {
+                adapter.submitList(it)
+            }
+        }
+
+        swipeLayout.setOnRefreshListener {
+            viewLifecycleScope?.launch {
+                viewModel.getNotification()
+                delay(REFRESH_TIME)
+                swipeLayout.isRefreshing = false
+            }
+        }
+
+        adapter.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                recyclerView.scrollToPosition(0)
+            }
+        })
 
         toolbar.appCompatImageView.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -50,7 +77,7 @@ class NotificationsFragment : ViewModelBindingFragment<FragmentNotificationsBind
 
     }
 
-    private fun createLectureAdapter(): GenericRecyclerViewAdapter<Int> {
+    private fun createLectureAdapter(): GenericRecyclerViewAdapter<NotificationData> {
         return GenericRecyclerViewAdapter(
             getViewLayout = { R.layout.notification_list_adapter_fragment },
             areItemsSame = ::sameCourseSlot,
@@ -64,17 +91,13 @@ class NotificationsFragment : ViewModelBindingFragment<FragmentNotificationsBind
         )
     }
 
-    private fun View.createShowPopup(data: Int) = PopupMenu(requireContext(), this).apply {
-        menu.add(Menu.NONE, 0, 0, context.getString(R.string.edit_details))
+    private fun View.createShowPopup(data: NotificationData) = PopupMenu(requireContext(), this).apply {
         menu.add(Menu.NONE, 1, 1, context.getString(R.string.delete))
 
         setOnMenuItemClickListener {
             when (it.itemId) {
-                0 -> {
-
-                }
                 1 -> {
-
+                   viewModel.notificationDelete(data.id)
                 }
             }
             false
@@ -82,8 +105,8 @@ class NotificationsFragment : ViewModelBindingFragment<FragmentNotificationsBind
 
     }
 
-    private fun sameCourseSlot(old: Int, new: Int): Boolean {
-        return old == new
+    private fun sameCourseSlot(old: NotificationData, new: NotificationData): Boolean {
+        return old.id == new.id
     }
 
     override fun onBackPressed(): Boolean {

@@ -64,6 +64,12 @@ buildscript {
         // stetho
         stetho = "1.5.1"
 
+        // upload service
+        gotevUploadService = "4.7.0"
+
+        // Ted permission
+        tedPermission = '3.3.0'
+
     }
 
     dependencies {

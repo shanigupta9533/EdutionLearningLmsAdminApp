@@ -26,9 +26,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            app:itemTextColor="@color/blue_5A4BDA"
-            app:itemIconTint="@color/blue_5A4BDA"
-            app:itemIconSize="@dimen/dp_18"
+            app:itemTextColor="@color/black"
+            app:itemIconTint="@color/black"
+            app:itemIconSize="@dimen/dp_21"
             app:itemTextAppearance="@style/drawer_item_text"
             app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/menu_main_drawer" />

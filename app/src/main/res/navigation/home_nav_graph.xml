@@ -50,6 +50,7 @@
         <action
             android:id="@+id/goToCoursesVideos"
             app:destination="@id/courseVideosFragment" />
+
         <action
             android:id="@+id/goToCoursesInsert"
             app:destination="@id/courseInsertFragment" />
@@ -64,9 +65,15 @@
         tools:layout="@layout/fragment_course_videos"
         android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CourseVideosFragment"
         android:label="CourseVideosFragment" >
+
         <action
             android:id="@+id/goToCourseVideosInsert"
             app:destination="@id/courseVideosInsertFragment" />
+
+        <argument
+            android:name="course_id"
+            app:argType="string" />
+
     </fragment>
 
     <fragment
@@ -101,18 +108,62 @@
         android:id="@+id/courseInsertFragment"
         tools:layout="@layout/fragment_course_insert"
         android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CourseInsertFragment"
-        android:label="CourseInsertFragment" />
+        android:label="CourseInsertFragment" >
+
+        <argument
+            android:name="data"
+            app:argType="com.edutionAdminLearning.edutionLearningAdmin.data.model.CoursesDetailsData"
+            app:nullable="true"
+            android:defaultValue="@null" />
+
+        <argument
+            android:name="is_update"
+            app:argType="boolean"
+            android:defaultValue="false" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/courseVideosInsertFragment"
         tools:layout="@layout/fragment_course_videos_insert"
         android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CourseVideosInsertFragment"
-        android:label="CourseVideosInsertFragment" />
+        android:label="CourseVideosInsertFragment" >
+
+        <argument
+            android:name="is_update"
+            app:argType="boolean"
+            android:defaultValue="false" />
+
+        <argument
+            android:name="course_id"
+            app:argType="string"
+             />
+
+        <argument
+            android:name="data"
+            app:argType="com.edutionAdminLearning.edutionLearningAdmin.data.model.CoursesVideo"
+            app:nullable="true"
+            android:defaultValue="@null" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/bannerInsertFragment"
         tools:layout="@layout/fragment_banner_insert"
         android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.BannerInsertFragment"
-        android:label="BannerInsertFragment" />
+        android:label="BannerInsertFragment" >
+
+        <argument
+            android:name="data"
+            app:argType="com.edutionAdminLearning.edutionLearningAdmin.data.model.BannerData"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="is_update"
+            app:argType="boolean"
+            android:defaultValue="false" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/notificationInsertFragment"
@@ -128,12 +179,33 @@
         <action
             android:id="@+id/goToCoursePurchasedInsert"
             app:destination="@id/coursePurchaseInsertFragment" />
+
+        <argument
+            android:name="course_id"
+            app:argType="string" />
+
     </fragment>
 
     <fragment
         android:id="@+id/coursePurchaseInsertFragment"
         tools:layout="@layout/fragment_course_purchase_insert"
         android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.CoursePurchaseInsertFragment"
-        android:label="CoursePurchaseInsertFragment" />
+        android:label="CoursePurchaseInsertFragment" >
+
+        <argument
+            android:name="is_update"
+            app:argType="boolean" />
+
+        <argument
+            android:name="course_id"
+            app:argType="string" />
+
+        <argument
+            android:name="data"
+            app:argType="com.edutionAdminLearning.edutionLearningAdmin.data.model.PurchaseDetails"
+            app:nullable="true"
+            android:defaultValue="@null" />
+
+    </fragment>
 
 </navigation>

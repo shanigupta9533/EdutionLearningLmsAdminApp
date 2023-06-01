@@ -103,7 +103,7 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_compiler_version"
     implementation 'com.razorpay:checkout:1.6.30'
-
+    implementation "net.gotev:uploadservice:$gotevUploadService"
     //loading shimmer
     implementation "com.facebook.shimmer:shimmer:$facebookShimmer"
 
@@ -115,6 +115,8 @@ dependencies {
 
     // Google material
     implementation "com.google.android.material:material:$googleMaterial"
+    // Permission Manager
+    implementation "io.github.ParkSangGwon:tedpermission-normal:$tedPermission"
 
     // Debugging
     debugImplementation "com.mocklets:pluto:$pluto"

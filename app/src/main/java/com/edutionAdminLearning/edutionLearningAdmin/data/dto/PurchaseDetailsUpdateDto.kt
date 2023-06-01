@@ -12,10 +12,10 @@ data class PurchaseDetailsUpdateDto(
     @SerializedName("price")
     val price: String? = null,
     @SerializedName("purchaseSpecList")
-    val purchaseSpecList: List<PurchaseSpecUpdate?>? = null
+    val purchaseSpecList: List<PurchaseSpecUpdateDto?>? = null
 )
 
-data class PurchaseSpecUpdate(
+data class PurchaseSpecUpdateDto(
     @SerializedName("available")
     val available: Boolean? = null,
     @SerializedName("purchase_spec_id")

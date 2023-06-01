@@ -7,7 +7,11 @@
 
         <variable
             name="item"
-            type="Integer" />
+            type="com.edutionAdminLearning.edutionLearningAdmin.data.model.BannerData" />
+
+        <variable
+            name="position"
+            type="String" />
 
     </data>
 
@@ -26,24 +30,46 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
-            android:minHeight="@dimen/dp_55">
+            android:minHeight="@dimen/dp_80">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                app:cardCornerRadius="@dimen/dimen_19dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="@dimen/dimen_12dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:id="@+id/banner_image_container"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="0dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    placeholder="@{@drawable/full_stack_developer}"
+                    android:scaleType="centerCrop"
+                    imgUrl="@{item.image}"
+                    android:id="@+id/banner_image"
+                    />
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/courseName"
+                android:id="@+id/bannerName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_12dp"
                 android:layout_marginEnd="@dimen/dimen_5dp"
                 android:ellipsize="end"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/dimen_12dp"
                 android:maxLines="2"
-                android:text="Android Development"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 app:fontFamily="@font/gilroy_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/dot_indicator"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/banner_image_container"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.486"
                 tools:text="Video lecture - 1 html css" />

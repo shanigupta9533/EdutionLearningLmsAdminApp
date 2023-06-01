@@ -40,6 +40,9 @@ data class CoursesVideoDto(
     @SerializedName("timestamp")
     val timestamp:String?=null,
 
+    @SerializedName("display_order")
+    val displayOrder:String?=null,
+
     @SerializedName("created_at")
     val createdAt:String?=null,
 
