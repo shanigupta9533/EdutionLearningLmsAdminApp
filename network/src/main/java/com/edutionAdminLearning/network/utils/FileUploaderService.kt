@@ -84,12 +84,12 @@ class FileUploaderService(
 
         val multipartUploadRequest = MultipartUploadRequest(context, baseUrl + uploadUrl)
             .setAutoDeleteFilesAfterSuccessfulUpload(true)
-            .setNotificationConfig { _, _ -> uploadNotificationService(multipartDataHolder.notificationTitle) }
             .setMaxRetries(2)
             .addHeader("accept", "application/json")
             .addHeader(AUTHORIZATION_TAG, BEARER_TOKEN + authToken())
             .setUploadID(multipartDataHolder.uniqueId)
             .setMethod(multipartDataHolder.method)
+            .setUsesFixedLengthStreamingMode(false)
 
         multipartDataHolder.parameterArray.forEach {
             multipartUploadRequest.addParameter(it.key, it.value)

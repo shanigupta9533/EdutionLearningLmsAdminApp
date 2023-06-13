@@ -33,7 +33,7 @@ class MyApplication : Application() {
         if (Build.VERSION.SDK_INT >= 26) {
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             val channel = NotificationChannel(
-                Channel, Constants.NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW
+                Channel, Constants.NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_NONE
             )
             channel.setSound(null, null);
             notificationManager.createNotificationChannel(channel)

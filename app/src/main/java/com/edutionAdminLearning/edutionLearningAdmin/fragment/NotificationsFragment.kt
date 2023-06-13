@@ -105,6 +105,11 @@ class NotificationsFragment : ViewModelBindingFragment<FragmentNotificationsBind
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        binding.swipeLayout.isRefreshing = false
+    }
+
     private fun sameCourseSlot(old: NotificationData, new: NotificationData): Boolean {
         return old.id == new.id
     }

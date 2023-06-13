@@ -4,15 +4,11 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class VideoDetails(
-    val askDoubtNumber: String,
-    val courseVideo: List<CoursesVideo>
-) : Parcelable
-
-@Parcelize
 data class CoursesVideo(
     val id: String,
     val videoName:String,
+    val lectureName:String,
+    val videoId:String,
     val videoLink:String,
     val homeWorkLink: String,
     val displayOrder: String,

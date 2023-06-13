@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +12,9 @@ import com.edutionAdminLearning.core_ui.adapter.GenericRecyclerViewAdapter
 import com.edutionAdminLearning.core_ui.fragment.ViewModelBindingFragment
 import com.edutionAdminLearning.edutionLearningAdmin.R
 import com.edutionAdminLearning.edutionLearningAdmin.data.model.CoursesVideo
-import com.edutionAdminLearning.edutionLearningAdmin.databinding.CourseListAdapterLayoutBinding
 import com.edutionAdminLearning.edutionLearningAdmin.databinding.CourseVideosListAdapterBinding
 import com.edutionAdminLearning.edutionLearningAdmin.databinding.FragmentCourseVideosBinding
 import com.edutionAdminLearning.edutionLearningAdmin.viewmodel.CourseDetailsViewModel
-import com.edutionAdminLearning.edutionLearningAdmin.viewmodel.HomeDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -38,7 +35,7 @@ class CourseVideosFragment : ViewModelBindingFragment<FragmentCourseVideosBindin
 
     override fun FragmentCourseVideosBinding.setViewModelBindingData() {
         lifecycleOwner = viewLifecycleOwner
-        viewModel.getVideoDetails(args.courseId)
+        viewModel.getCoursesVideoDetails(args.courseId)
         recyclerView.adapter = adapter
         toolbar.addIcon.setOnClickListener {
             findNavController().navigate(
@@ -49,7 +46,7 @@ class CourseVideosFragment : ViewModelBindingFragment<FragmentCourseVideosBindin
         viewLifecycleScope?.launch {
             viewModel.respondSuccess.collect {
                 if (it) {
-                    viewModel.getVideoDetails(args.courseId)
+                    viewModel.getCoursesVideoDetails(args.courseId)
                 }
             }
         }
@@ -75,7 +72,7 @@ class CourseVideosFragment : ViewModelBindingFragment<FragmentCourseVideosBindin
 
         swipeLayout.setOnRefreshListener {
             viewLifecycleScope?.launch {
-                viewModel.getVideoDetails(args.courseId)
+                viewModel.getCoursesVideoDetails(args.courseId)
                 delay(3000)
                 swipeLayout.isRefreshing = false
             }
@@ -125,7 +122,7 @@ class CourseVideosFragment : ViewModelBindingFragment<FragmentCourseVideosBindin
                     )
                 }
                 1 -> {
-                    viewModel.videoDetailsDelete(courseVideo.id)
+                    viewModel.coursesVideoDetailsDelete(courseVideo.id)
                 }
             }
             false

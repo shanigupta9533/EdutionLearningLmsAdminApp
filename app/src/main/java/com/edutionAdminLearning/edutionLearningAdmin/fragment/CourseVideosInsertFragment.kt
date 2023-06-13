@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.edutionAdminLearning.core.result.ApiResponse
 import com.edutionAdminLearning.core.type.EMPTY
@@ -15,12 +16,12 @@ import com.edutionAdminLearning.core_ui.extensions.toastL
 import com.edutionAdminLearning.core_ui.fragment.ViewModelBindingFragment
 import com.edutionAdminLearning.edutionLearningAdmin.R
 import com.edutionAdminLearning.edutionLearningAdmin.databinding.FragmentCourseVideosInsertBinding
+import com.edutionAdminLearning.edutionLearningAdmin.di.ChatEvents
 import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants
 import com.edutionAdminLearning.edutionLearningAdmin.utils.FilePickUtils
 import com.edutionAdminLearning.edutionLearningAdmin.utils.makeStoragePermission
 import com.edutionAdminLearning.edutionLearningAdmin.utils.mimeTypesOfEverything
 import com.edutionAdminLearning.edutionLearningAdmin.utils.mimeTypesOfPdf
-import com.edutionAdminLearning.edutionLearningAdmin.utils.mimeTypesOfVideo
 import com.edutionAdminLearning.edutionLearningAdmin.utils.setCourseVideoUploadFile
 import com.edutionAdminLearning.edutionLearningAdmin.utils.updateCourseVideoUploadFile
 import com.edutionAdminLearning.edutionLearningAdmin.viewmodel.CourseDetailsViewModel
@@ -30,6 +31,7 @@ import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import net.gotev.uploadservice.data.UploadInfo
 import net.gotev.uploadservice.exceptions.UploadError
 import net.gotev.uploadservice.exceptions.UserCancelledUploadException
@@ -39,6 +41,11 @@ import net.gotev.uploadservice.observer.request.RequestObserverDelegate
 import java.io.File
 import javax.inject.Inject
 
+data class VideoDetails(
+    val videoId: String,
+    val videoName: String
+)
+
 @AndroidEntryPoint
 class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideosInsertBinding, CourseDetailsViewModel>(
     FragmentCourseVideosInsertBinding::inflate
@@ -47,10 +54,10 @@ class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideos
     private val args by navArgs<CourseVideosInsertFragmentArgs>()
     private var uploadType: UploadType = UploadType.COURSE_CODE_LINK
     override val viewModel: CourseDetailsViewModel by viewModels()
-    private var videoFile: File? = null
     private var homeWorkFile: File? = null
     private var projectFile: File? = null
     private var codeFile: File? = null
+    private var videoData: VideoDetails? = null
 
     @Inject
     lateinit var fileUploaderService: FileUploaderService
@@ -69,11 +76,49 @@ class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideos
 
         if (args.isUpdate) {
             args.data?.let {
-                lectureName.setText(it.videoName.value)
+                lectureName.setText(it.lectureName.value)
                 submit.text = getString(R.string.update_course_video_details)
                 displayOrder.visibility = View.VISIBLE
                 displayOrder.setText(args.data?.displayOrder.value)
+
+                videoData = VideoDetails(
+                    videoId = it.videoId,
+                    videoName = it.videoName,
+                )
+
+                videoNameEt.post {
+                    videoNameEt.setText(it.videoName)
+                }
+
             }
+        }
+
+        viewLifecycleScope?.launch {
+            ChatEvents.onVideoEvents.collect {
+
+                it?.let {
+
+                    videoData = VideoDetails(
+                        videoId = it.id.value,
+                        videoName = it.videoName.value
+                    )
+
+                    videoNameEt.post {
+                        videoNameEt.setText(it.videoName.value)
+                    }
+
+                    ChatEvents.onVideoSelected(null)
+                }
+
+            }
+        }
+
+        videoNameEt.setOnClickListener {
+            findNavController().navigate(
+                CourseVideosInsertFragmentDirections.goToVideo(
+                    isFromCourse = true
+                )
+            )
         }
 
         RequestObserver(requireContext(),
@@ -154,20 +199,6 @@ class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideos
 
                                         }
 
-                                        UploadType.COURSE_VIDEO_LINK -> {
-
-                                            FileUtils.deleteRecursively(videoFile)
-                                            if (fileInMb > 500) {
-                                                toastL(getString(R.string.video_link_file_should_be_less_than_500mb))
-                                                FileUtils.deleteRecursively(file)
-                                                videoFile = null
-                                                return@launch
-                                            }
-
-                                            binding.videoName.text = file.name
-                                            videoFile = file
-
-                                        }
                                     }
 
 
@@ -197,11 +228,6 @@ class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideos
         context?.makeStoragePermission(mimeTypesOfPdf, startForResult)
     }
 
-    fun videoLink() {
-        uploadType = UploadType.COURSE_VIDEO_LINK
-        context?.makeStoragePermission(mimeTypesOfVideo, startForResult)
-    }
-
     override fun onBackPressed(): Boolean {
         return false
     }
@@ -210,12 +236,18 @@ class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideos
 
         binding.apply {
             lectureName.error = null
+            videoDetails.error = null
 
             when {
 
                 lectureName.text.toString().length < 3 -> {
                     lectureName.error = getString(R.string.min_3_letter_required_in_course_type_field)
                     lectureName.requestFocus()
+                }
+
+                (videoData == null && args.isUpdate.not()) -> {
+                    videoDetails.error = getString(R.string.choose_a_video)
+                    videoDetails.requestFocus()
                 }
 
                 (codeFile == null || codeFile?.exists()?.not() == true) && args.isUpdate.not() -> {
@@ -230,10 +262,6 @@ class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideos
                     toastL(getString(R.string.choose_a_project_file))
                 }
 
-                (videoFile == null || videoFile?.exists()?.not() == true) && args.isUpdate.not() -> {
-                    toastL(getString(R.string.choose_a_video_file))
-                }
-
                 args.isUpdate -> {
                     viewModel.startLoading()
 
@@ -245,14 +273,14 @@ class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideos
 
                     updateCourseVideoUploadFile(
                         lectureName = lectureName.text.toString(),
-                        courseId = args.courseId,
+                        videoId = videoData?.videoId.value,
                         codeFile = codeFile,
                         homeWorkFile = homeWorkFile,
-                        videoId = args.data?.id.value,
+                        courseId = args.courseId.value,
                         projectFile = projectFile,
                         fileUploaderService = fileUploaderService,
-                        videoFile = videoFile,
-                        displayNumber = args.data?.displayOrder.value
+                        displayNumber = args.data?.displayOrder.value,
+                        courseVideoId = args.data?.id.value
                     )
                 }
 
@@ -263,9 +291,9 @@ class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideos
                         codeFile = codeFile,
                         homeWorkFile = homeWorkFile,
                         projectFile = projectFile,
-                        videoFile = videoFile,
                         courseId = args.courseId,
-                        fileUploaderService = fileUploaderService
+                        fileUploaderService = fileUploaderService,
+                        videoId = videoData?.videoId.value
                     )
                 }
             }
@@ -277,7 +305,6 @@ class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideos
         COURSE_CODE_LINK,
         COURSE_HOME_WORK_LINK,
         COURSE_PROJECT_LINK,
-        COURSE_VIDEO_LINK
     }
 
     override fun onCompleted(context: Context, uploadInfo: UploadInfo) {
@@ -318,14 +345,14 @@ class CourseVideosInsertFragment : ViewModelBindingFragment<FragmentCourseVideos
 
         if (args.isUpdate.not())
             binding.apply {
+                videoData = null
+                videoNameEt.setText(String.EMPTY)
                 lectureName.setText(String.EMPTY)
                 codeLinkName.text = getString(R.string.drag_amp_drop_code_file)
-                videoName.text = getString(R.string.drag_amp_drop_video)
                 homeWorkName.text = getString(R.string.drag_amp_drop_home_work_pdf)
                 projectName.text = getString(R.string.drag_amp_drop_project_pdf)
 
                 codeFile = null
-                videoFile = null
                 homeWorkFile = null
                 projectFile = null
 

@@ -2,6 +2,7 @@ package com.edutionAdminLearning.edutionLearningAdmin.utils
 
 import android.Manifest
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -10,11 +11,10 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.activity.result.ActivityResultLauncher
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AlertDialog
 import com.edutionAdminLearning.core.type.EMPTY
 import com.edutionAdminLearning.core_ui.extensions.toastL
 import com.edutionAdminLearning.edutionLearningAdmin.R
-import com.google.android.exoplayer2.util.FileTypes.MP4
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +27,8 @@ import java.util.Locale
 import java.util.UUID
 
 val IMAGE_EXTENSIONS = arrayOf("image/jpg", "image/png", "image/gif", "image/jpeg", "image/webp")
+
+val VIDEO_EXTENSIONS = arrayOf("video/mp4", "video/webm", "video/ogg", "video/avi")
 
 inline fun <reified T : Parcelable> Bundle.parcelableArrayList(key: String): ArrayList<T>? = when {
     SDK_INT >= 33 -> getParcelableArrayList(key, T::class.java)
@@ -150,6 +152,16 @@ internal val mimeTypesOfVideo = arrayOf(
     "video/webm",
     "video/mpeg"
 )
+
+fun createDialog(context: Context?, title: String?, message: String?, posBtnName: String? = "Yes", posClick: DialogInterface.OnClickListener?, negBtnName: String? = "No", negClick: DialogInterface.OnClickListener?) {
+    val builder = AlertDialog.Builder(context!!)
+    builder.setTitle(title)
+    builder.setMessage(message)
+    builder.setPositiveButton(posBtnName, posClick)
+    builder.setNegativeButton(negBtnName, negClick)
+    val dialog = builder.create()
+    dialog.show()
+}
 
 private fun Context.whatsAppBusinessLaunch(contact: String, shareText: String) {
 

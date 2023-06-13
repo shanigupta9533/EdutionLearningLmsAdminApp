@@ -14,7 +14,9 @@ import com.edutionAdminLearning.edutionLearningAdmin.data.dto.PurchaseDetailsUpd
 import com.edutionAdminLearning.edutionLearningAdmin.data.dto.PurchaseSubmitDto
 import com.edutionAdminLearning.edutionLearningAdmin.data.dto.SignUpSubmitDto
 import com.edutionAdminLearning.edutionLearningAdmin.data.dto.UserDetailsResponseDto
-import com.edutionAdminLearning.edutionLearningAdmin.data.dto.VideoDetailsDto
+import com.edutionAdminLearning.edutionLearningAdmin.data.dto.VideoDataDto
+import com.edutionAdminLearning.edutionLearningAdmin.data.dto.CoursesVideoDetailsDto
+import com.edutionAdminLearning.edutionLearningAdmin.data.dto.CoursesVideoDto
 import javax.inject.Inject
 
 class LmsEdutionDataSourceImpl @Inject constructor(
@@ -39,6 +41,12 @@ class LmsEdutionDataSourceImpl @Inject constructor(
         }.getDataResult()
     }
 
+    override suspend fun videoDetails(keywords: String): MyResult<List<VideoDataDto>, CompleteApiError<Error>> {
+        return exeApi {
+            lmsApi.getVideoDetails(keywords)
+        }.getDataResult()
+    }
+
     override suspend fun coursesUpdateLive(courseId: String): MyResult<Unit, CompleteApiError<Error>> {
         return exeApi {
             lmsApi.courseUpdateLive(courseId)
@@ -48,6 +56,18 @@ class LmsEdutionDataSourceImpl @Inject constructor(
     override suspend fun coursesDetailsDelete(params: String): MyResult<Unit, CompleteApiError<Error>> {
         return exeApi {
             lmsApi.deleteCourseDetails(params)
+        }.getDataResult()
+    }
+
+    override suspend fun videoDetailsDelete(videoId: String): MyResult<Unit, CompleteApiError<Error>> {
+        return exeApi {
+            lmsApi.deleteVideoDelete(videoId)
+        }.getDataResult()
+    }
+
+    override suspend fun retryVideoUseCase(videoId: String): MyResult<Boolean, CompleteApiError<Error>> {
+        return exeApi {
+            lmsApi.retryVideo(videoId)
         }.getDataResult()
     }
 
@@ -108,9 +128,9 @@ class LmsEdutionDataSourceImpl @Inject constructor(
         }.getDataResult()
     }
 
-    override suspend fun getVideoDetails(courseId: String): MyResult<VideoDetailsDto?, CompleteApiError<Error>> {
+    override suspend fun getVideoDetails(courseId: String): MyResult<List<CoursesVideoDto>, CompleteApiError<Error>> {
         return exeApi {
-            lmsApi.getVideoDetails(courseId)
+            lmsApi.getCoursesVideoDetails(courseId)
         }.getDataResult()
     }
 

@@ -2,35 +2,28 @@ package com.edutionAdminLearning.edutionLearningAdmin.data.mapper
 
 import com.edutionAdminLearning.core.domain.Mapper
 import com.edutionAdminLearning.core.type.value
-import com.edutionAdminLearning.edutionLearningAdmin.data.dto.VideoDetailsDto
-import com.edutionAdminLearning.edutionLearningAdmin.data.model.CoursesVideo
-import com.edutionAdminLearning.edutionLearningAdmin.data.model.VideoDetails
+import com.edutionAdminLearning.edutionLearningAdmin.data.dto.VideoDataDto
+import com.edutionAdminLearning.edutionLearningAdmin.data.model.VideoData
 import javax.inject.Inject
 
-class VideoDetailsMapper @Inject constructor() : Mapper<VideoDetails?, VideoDetailsDto?, Unit>() {
-    override fun dtoToDomain(dto: VideoDetailsDto?): VideoDetails? {
-        return VideoDetails(
-            askDoubtNumber = dto?.askDoubtNumber.value,
-            courseVideo = dto?.courseVideo?.map {
-                CoursesVideo(
-                    id = it.id.value,
-                    courseId = it.courseId.value,
-                    codeLink = it.codeLink.value,
-                    homeWorkLink = it.homeWorkLink.value,
-                    projectLink = it.projectLink.value,
-                    createdAt = it.createdAt.value,
-                    updatedAt = it.updatedAt.value,
-                    videoName = it.videoName.value,
-                    videoLink = it.videoLink.value,
-                    isVideoPlaying = it.isVideoPlaying ?: false,
-                    timestamp = it.timestamp ?: "0",
-                    displayOrder = it.displayOrder ?: "0"
-                )
-            } ?: emptyList()
+class VideoDetailsMapper @Inject constructor(
+) : Mapper<VideoData?, VideoDataDto?, Unit>() {
+
+    override fun dtoToDomain(dto: VideoDataDto?): VideoData? {
+        return VideoData(
+            id = dto?.id.value,
+            videoName = dto?.videoName.value,
+            videoUniqueName = dto?.videoUniqueName.value,
+            status = dto?.status ?: false,
+            videoLocate = dto?.videoLocate.value,
+            createdAt = dto?.createdAt.value,
+            updatedAt = dto?.updatedAt.value,
+            videoData = dto?.videoData.value,
+            failed = dto?.failed ?: true
         )
     }
 
-    override fun domainToDto(domain: VideoDetails?): VideoDetailsDto {
-        return VideoDetailsDto()
+    override fun domainToDto(domain: VideoData?): VideoDataDto? {
+        return VideoDataDto()
     }
 }

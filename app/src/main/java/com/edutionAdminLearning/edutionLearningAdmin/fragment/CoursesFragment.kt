@@ -30,7 +30,6 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, CourseD
     override fun FragmentCoursesBinding.setViewBindingVariables() {
         toolbarText = getString(R.string.courses_details)
         vm = viewModel
-
     }
 
     @SuppressLint("SuspiciousIndentation")
@@ -45,7 +44,7 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, CourseD
             )
         }
 
-        adapter.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver() {
+        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 recyclerView.scrollToPosition(0)
             }
@@ -112,13 +111,16 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, CourseD
     }
 
     private fun View.createShowPopup(coursesDetailsData: CoursesDetailsData) = PopupMenu(requireContext(), this).apply {
-        menu.add(Menu.NONE, 0, 0, context.getString(R.string.video_details))
+        menu.add(Menu.NONE, 0, 0, context.getString(R.string.courses_details_video))
         menu.add(Menu.NONE, 1, 1, context.getString(R.string.purchase_details))
 
         if (coursesDetailsData.isLive)
             menu.add(Menu.NONE, 2, 2, context.getString(R.string.disable))
         else
             menu.add(Menu.NONE, 3, 3, context.getString(R.string.enable))
+
+        menu.add(Menu.NONE, 4, 4, context.getString(R.string.user_purchased))
+        menu.add(Menu.NONE, 5, 5, context.getString(R.string.video_details))
 
         setOnMenuItemClickListener {
             when (it.itemId) {
@@ -137,17 +139,29 @@ class CoursesFragment : ViewModelBindingFragment<FragmentCoursesBinding, CourseD
                 }
 
                 2 -> {
-                   viewModel.updateCourseUpdateLive(coursesDetailsData.id)
+                    viewModel.updateCourseUpdateLive(coursesDetailsData.id)
                 }
 
                 3 -> {
                     viewModel.updateCourseUpdateLive(coursesDetailsData.id)
                 }
+
+                4 -> {
+
+                }
+
+                5 -> {
+                    findNavController().navigate(
+                        CoursesFragmentDirections.goToVideo()
+                    )
+                }
+
             }
             false
         }
 
     }
+
 
     private fun sameCourseSlot(old: CoursesDetailsData, new: CoursesDetailsData): Boolean {
         return old.id == new.id

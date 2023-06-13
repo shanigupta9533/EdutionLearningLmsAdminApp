@@ -37,6 +37,8 @@
     <string name="course_videos">Course Videos</string>
     <string name="edit_details">Edit Details</string>
     <string name="delete">Delete</string>
+    <string name="retry">Retry</string>
+    <string name="courses_details_video">Courses Details Video</string>
     <string name="courses_details">Courses Details</string>
     <string name="banners_details">Banners Details</string>
     <string name="notification_details">Notification Details</string>
@@ -54,12 +56,15 @@
     <string name="from_device">from device</string>
     <string name="submit_course_details">Submit Course Details</string>
     <string name="submit_course_video_details">Submit Course Video Details</string>
+    <string name="submit_video_details">Submit Video Details</string>
     <string name="insert_course_details">Insert Course Details</string>
     <string name="course_videos_insert">Course Videos Insert</string>
     <string name="lecture_name">Lecture Name</string>
     <string name="enter_message_text_here">Enter Message Text Here</string>
+    <string name="enter_video_name_here">Enter Video Name Here</string>
     <string name="submit_banner_details">Submit Banner Details</string>
     <string name="banner_details_insert">Banner Details Insert</string>
+    <string name="video_details_insert">Video Details Insert</string>
     <string name="notification_insert">Notification Insert</string>
     <string name="enter_notification_message">Enter Notification Message</string>
     <string name="submit_notification">Submit Notification</string>
@@ -76,6 +81,7 @@
     <string name="min_10_letter_required_in_course_type_field">Min 10 letter required in this field…</string>
     <string name="course_price_is_required">Course Price is required…</string>
     <string name="image_size_should_be_less_than_1mb">Image size should be less than 1 mb.</string>
+    <string name="video_size_should_be_less_than_1gb">Video size should be less than 1 gb.</string>
     <string name="code_file_should_be_less_than_5mb">Code File should be less than 5 mb.</string>
     <string name="home_work_should_be_less_than_5mb">Home Work should be less than 5 mb.</string>
     <string name="project_file_should_be_less_than_3mb">Project File should be less than 3 mb.</string>
@@ -85,6 +91,7 @@
     <string name="data_insert_successfully">Data Insert Successfully</string>
     <string name="update_course_purchase_details">Update Course Purchase Details</string>
     <string name="choose_a_image">Choose a image</string>
+    <string name="choose_a_video">Choose a video</string>
     <string name="update_banner_details">Update Banner Details</string>
     <string name="enter_starting_price">Enter Starting Price</string>
     <string name="update_course_details">Update Course Details</string>
@@ -110,4 +117,8 @@
     <string name="cancel">Cancel</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
+    <string name="user_purchased">User Purchased</string>
+    <string name="search_video_details">Search Video Details</string>
+    <string name="video_name">Video Name</string>
+    <string name="are_you_sure_you_want_to_delete">Are you sure you want to delete?</string>
 </resources>

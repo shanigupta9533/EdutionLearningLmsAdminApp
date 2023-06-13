@@ -10,7 +10,9 @@ import com.edutionAdminLearning.edutionLearningAdmin.data.dto.PurchaseDetailsUpd
 import com.edutionAdminLearning.edutionLearningAdmin.data.dto.PurchaseSubmitDto
 import com.edutionAdminLearning.edutionLearningAdmin.data.dto.SignUpSubmitDto
 import com.edutionAdminLearning.edutionLearningAdmin.data.dto.UserDetailsResponseDto
-import com.edutionAdminLearning.edutionLearningAdmin.data.dto.VideoDetailsDto
+import com.edutionAdminLearning.edutionLearningAdmin.data.dto.VideoDataDto
+import com.edutionAdminLearning.edutionLearningAdmin.data.dto.CoursesVideoDetailsDto
+import com.edutionAdminLearning.edutionLearningAdmin.data.dto.CoursesVideoDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -41,6 +43,16 @@ interface LmsApi {
     suspend fun deleteCourseDetails(
         @Path("courseId") courseId: String,
         ): Response<ApiResponse<Unit>>
+
+    @DELETE("api/admin/videos/{videoId}")
+    suspend fun deleteVideoDelete(
+        @Path("videoId") videoId: String,
+    ): Response<ApiResponse<Unit>>
+
+    @GET("api/admin/retryVideo")
+    suspend fun retryVideo(
+        @Query("video_id") videoId: String,
+    ): Response<ApiResponse<Boolean>>
 
     @GET("api/admin/purchaseDetails")
     suspend fun getPurchaseDetails(
@@ -96,10 +108,15 @@ interface LmsApi {
         @Path("notificationId") notificationId: String
     ): Response<ApiResponse<Unit>>
 
-    @GET("api/admin/courseVideo")
-    suspend fun getVideoDetails(
+    @GET("api/admin/allCourseVideos")
+    suspend fun getCoursesVideoDetails(
         @Query("course_id") courseId: String
-    ): Response<ApiResponse<VideoDetailsDto>>
+    ): Response<ApiResponse<List<CoursesVideoDto>>>
+
+    @GET("api/admin/videos")
+    suspend fun getVideoDetails(
+        @Query("keywords") keywords: String
+    ): Response<ApiResponse<List<VideoDataDto>>>
 
     @DELETE("api/admin/courseVideo/{video_id}")
     suspend fun courseVideoDelete(

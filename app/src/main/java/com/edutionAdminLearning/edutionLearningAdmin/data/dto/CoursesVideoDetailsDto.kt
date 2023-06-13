@@ -2,7 +2,7 @@ package com.edutionAdminLearning.edutionLearningAdmin.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class VideoDetailsDto(
+data class CoursesVideoDetailsDto(
 
     @SerializedName("askDoubtNumber")
     val askDoubtNumber: String?=null,
@@ -19,7 +19,13 @@ data class CoursesVideoDto(
     @SerializedName("video_name")
     val videoName:String?=null,
 
-    @SerializedName("video_link")
+    @SerializedName("lecture_name")
+    val lectureName: String?=null,
+
+    @SerializedName("video_id")
+    val videoId:String?=null,
+
+    @SerializedName("video_data")
     val videoLink:String?=null,
 
     @SerializedName("home_work_link")

@@ -1,8 +1,6 @@
 package com.edutionAdminLearning.edutionLearningAdmin.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.edutionAdminLearning.core.result.getMessage
-import com.edutionAdminLearning.core.result.getWarningType
 import com.edutionAdminLearning.core.result.onFailure
 import com.edutionAdminLearning.core.result.onSuccess
 import com.edutionAdminLearning.core.result.toBasicUi
@@ -11,21 +9,23 @@ import com.edutionAdminLearning.edutionLearningAdmin.data.dto.PurchaseSubmitDto
 import com.edutionAdminLearning.edutionLearningAdmin.data.model.CoursesDetailsData
 import com.edutionAdminLearning.edutionLearningAdmin.data.model.CoursesVideo
 import com.edutionAdminLearning.edutionLearningAdmin.data.model.PurchaseDetails
+import com.edutionAdminLearning.edutionLearningAdmin.data.model.VideoData
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.CourseDetailDeleteUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.CourseDetailUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.CourseUpdateLiveUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.CourseVideosDeleteUseCase
-import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.GetVideoDetailsUseCase
+import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.GetCoursesVideoDetailsUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.PurchaseDetailUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.PurchaseDetailsDeleteUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.PurchaseDetailsSubmitUseCase
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.PurchaseDetailsUpdate
 import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.PurchaseDetailsUpdateUseCase
+import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.RetryVideosUseCase
+import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.VideoDeleteDetailsUseCase
+import com.edutionAdminLearning.edutionLearningAdmin.data.usecase.VideoDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,9 +37,12 @@ class CourseDetailsViewModel @Inject constructor(
     private val purchaseDetailsSubmitUseCase: PurchaseDetailsSubmitUseCase,
     private val purchaseDetailsUpdateUseCase: PurchaseDetailsUpdateUseCase,
     private val purchaseDetailsDeleteUseCase: PurchaseDetailsDeleteUseCase,
-    private val videoDetailsUseCase: GetVideoDetailsUseCase,
+    private val coursesVideoDetailsUseCase: GetCoursesVideoDetailsUseCase,
     private val courseVideoDeleteUseCase: CourseVideosDeleteUseCase,
-    private val courseUpdateLiveUseCase: CourseUpdateLiveUseCase
+    private val courseUpdateLiveUseCase: CourseUpdateLiveUseCase,
+    private val videoDetailsUseCase: VideoDetailUseCase,
+    private val videoDeleteDetailsUseCase: VideoDeleteDetailsUseCase,
+    private val retryVideosUseCase: RetryVideosUseCase
 ) : BaseViewModel() {
 
     private val _getAllCourses = MutableSharedFlow<List<CoursesDetailsData>?>(extraBufferCapacity = 1)
@@ -47,6 +50,9 @@ class CourseDetailsViewModel @Inject constructor(
 
     private val _coursesVideoPlayer = MutableSharedFlow<List<CoursesVideo>>(extraBufferCapacity = 1)
     val coursesVideoPlayer = _coursesVideoPlayer.asSharedFlow()
+
+    private val _videoDetails = MutableSharedFlow<List<VideoData?>>(extraBufferCapacity = 1)
+    val videoDetails = _videoDetails.asSharedFlow()
 
     private val _getAllPurchaseDetails = MutableSharedFlow<List<PurchaseDetails>?>(extraBufferCapacity = 1)
     val getAllPurchaseDetails = _getAllPurchaseDetails.asSharedFlow()
@@ -109,21 +115,6 @@ class CourseDetailsViewModel @Inject constructor(
         }
     }
 
-    fun courseDetailsDelete(courseId: String) {
-        startLoading()
-        viewModelScope.launch {
-            courseDetailDeleteUseCase(courseId)
-                .onSuccess {
-                    stopLoading()
-                    _respondSuccess.tryEmit(true)
-                }
-                .onFailure {
-                    stopLoading()
-                    it.toBasicUi().show()
-                }
-        }
-    }
-
     fun submitPurchaseDetails(purchaseSubmitDto: PurchaseSubmitDto) {
         startLoading()
         viewModelScope.launch {
@@ -169,12 +160,42 @@ class CourseDetailsViewModel @Inject constructor(
         }
     }
 
-    fun getVideoDetails(course_id: String) {
+    fun videoDetailsDelete(videoId: String) {
         startLoading()
         viewModelScope.launch {
-            videoDetailsUseCase(course_id).onSuccess {
+            videoDeleteDetailsUseCase(videoId)
+                .onSuccess {
+                    stopLoading()
+                    _respondSuccess.tryEmit(true)
+                }
+                .onFailure {
+                    stopLoading()
+                    it.toBasicUi().show()
+                }
+        }
+    }
+
+    fun retryVideos(videoId: String) {
+        startLoading()
+        viewModelScope.launch {
+            retryVideosUseCase(videoId)
+                .onSuccess {
+                    stopLoading()
+                    _respondSuccess.tryEmit(true)
+                }
+                .onFailure {
+                    stopLoading()
+                    it.toBasicUi().show()
+                }
+        }
+    }
+
+    fun getCoursesVideoDetails(course_id: String) {
+        startLoading()
+        viewModelScope.launch {
+            coursesVideoDetailsUseCase(course_id).onSuccess {
                 stopLoading()
-                _coursesVideoPlayer.tryEmit(it?.courseVideo ?: emptyList())
+                _coursesVideoPlayer.tryEmit(it)
             }.onFailure {
                 it.toBasicUi().show()
                 stopLoading()
@@ -182,7 +203,20 @@ class CourseDetailsViewModel @Inject constructor(
         }
     }
 
-    fun videoDetailsDelete(videoId: String) {
+    fun getVideoDetails(keywords: String) {
+        startLoading()
+        viewModelScope.launch {
+            videoDetailsUseCase(keywords).onSuccess {
+                stopLoading()
+                _videoDetails.tryEmit(it)
+            }.onFailure {
+                it.toBasicUi().show()
+                stopLoading()
+            }
+        }
+    }
+
+    fun coursesVideoDetailsDelete(videoId: String) {
         startLoading()
         viewModelScope.launch {
             courseVideoDeleteUseCase(videoId).onSuccess {

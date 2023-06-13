@@ -38,7 +38,7 @@ android {
         debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", '"https://www.edutions.in/edutionLearningLms/"'
+            buildConfigField "String", "BASE_URL", '"https://www.edutions.online/edutionLearningLms/"'
             buildConfigField "String", "ONE_SIGNAL_APP_ID", '"43ab056f-6069-4bf9-ba12-395b495dbb19"'
         }
 

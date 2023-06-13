@@ -122,6 +122,11 @@ class BannersDetailsFragment : ViewModelBindingFragment<FragmentBannersDetailsBi
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        binding.swipeLayout.isRefreshing = false
+    }
+
     private fun sameCourseSlot(old: BannerData, new: BannerData): Boolean {
         return old.id == new.id
     }

@@ -15,6 +15,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -26,11 +27,7 @@ import com.google.android.material.button.MaterialButton
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-const val MESSAGE_DENIED = "Permission Denied"
 const val MAIN_FOLDER_NAME = "/edutionLearningUpload"
-const val MAIN_FILE_NAME = "/PhysicsWallah"
-const val RECORDING_FILE_LOCATION = "/recording"
-const val CREATED_AUDIO_FILE_EXTENSION = ".mp3"
 const val DOWNLOADING_FILE_LOCATION = "/download_files"
 
 @BindingAdapter(value = ["imgUrl", "placeholder"], requireAll = false)
@@ -41,6 +38,11 @@ fun ImageView.setImgUrl(url: String?, placeholder: Drawable? = null) {
 @BindingAdapter(value = ["imgUrl", "placeholder"], requireAll = false)
 fun ImageView.setImgUrl(@RawRes @DrawableRes url: Int?, placeholder: Drawable? = null) {
     asyncSrc(url, placeholder)
+}
+
+@BindingAdapter(value = ["videoStatus", "videoFailed"], requireAll = true)
+fun CardView.updateStatus(status: Boolean, failed: Boolean) {
+    changeStatus(status, failed)
 }
 
 @BindingAdapter(value = ["imgUrlCC", "placeholderCC", "compressed"], requireAll = false)
@@ -182,6 +184,25 @@ fun ImageView.asyncSrc(@RawRes @DrawableRes url: Int?, placeholder: Drawable?) {
         val requestCreator = Glide.with(this.context).load(url).apply(requestOptions).dontAnimate()
         requestCreator.into(this)
     }
+}
+
+fun CardView.changeStatus(status: Boolean, failed: Boolean) {
+
+    if (this.context.isAvailable().not())
+        return
+
+    if (failed && status.not())
+        setCardBackgroundColor(ContextCompat.getColor(this.context, R.color.quantum_googred600))
+    else if(failed.not() && status){
+        setCardBackgroundColor(ContextCompat.getColor(this.context, R.color.quantum_googgreen300))
+    } else if(status.not() && failed.not()){
+        setCardBackgroundColor(ContextCompat.getColor(this.context, R.color.quantum_grey300))
+    } else if(status) {
+        setCardBackgroundColor(ContextCompat.getColor(this.context, R.color.quantum_googgreen300))
+    } else {
+        setCardBackgroundColor(ContextCompat.getColor(this.context, R.color.quantum_googred600))
+    }
+
 }
 
 fun Context?.isAvailable(): Boolean {

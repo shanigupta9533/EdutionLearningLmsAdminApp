@@ -7,7 +7,11 @@
 
         <variable
             name="item"
-            type="com.edutionAdminLearning.edutionLearningAdmin.data.model.CoursesVideo" />
+            type="com.edutionAdminLearning.edutionLearningAdmin.data.model.VideoData" />
+
+        <variable
+            name="position"
+            type="String" />
 
     </data>
 
@@ -26,25 +30,37 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
-            android:minHeight="@dimen/dp_55">
+            android:minHeight="@dimen/dp_45">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/green_dot"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_marginStart="@dimen/dimen_12dp"
+                videoStatus="@{item.status}"
+                videoFailed="@{item.failed}"
+                app:cardCornerRadius="@dimen/dimen_30dp"
+                app:cardElevation="@dimen/dimen_0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/courseName"
+                android:id="@+id/video_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_12dp"
                 android:layout_marginEnd="@dimen/dimen_5dp"
                 android:ellipsize="end"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/dimen_12dp"
                 android:maxLines="2"
-                android:text="@{item.lectureName}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 app:fontFamily="@font/gilroy_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/dot_indicator"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/green_dot"
                 app:layout_constraintVertical_bias="0.486"
                 tools:text="Video lecture - 1 html css" />
 

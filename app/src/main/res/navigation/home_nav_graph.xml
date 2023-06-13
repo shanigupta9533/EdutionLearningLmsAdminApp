@@ -58,6 +58,10 @@
             android:id="@+id/goToCoursePurchased"
             app:destination="@id/coursePurchaseFragment" />
 
+        <action
+            android:id="@+id/goToVideo"
+            app:destination="@id/videoDetailsFragment" />
+
     </fragment>
 
     <fragment
@@ -73,6 +77,7 @@
         <argument
             android:name="course_id"
             app:argType="string" />
+
 
     </fragment>
 
@@ -145,6 +150,10 @@
             app:nullable="true"
             android:defaultValue="@null" />
 
+        <action
+            android:id="@+id/goToVideo"
+            app:destination="@id/videoDetailsFragment" />
+
     </fragment>
 
     <fragment
@@ -205,6 +214,29 @@
             app:argType="com.edutionAdminLearning.edutionLearningAdmin.data.model.PurchaseDetails"
             app:nullable="true"
             android:defaultValue="@null" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/videoInsertFragment"
+        tools:layout="@layout/fragment_video_insert"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.VideoInsertFragment"
+        android:label="VideoInsertFragment" />
+
+    <fragment
+        android:id="@+id/videoDetailsFragment"
+        tools:layout="@layout/fragment_video_details"
+        android:name="com.edutionAdminLearning.edutionLearningAdmin.fragment.VideoDetailsFragment"
+        android:label="VideoDetailsFragment" >
+
+        <argument
+            android:name="isFromCourse"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
+        <action
+            android:id="@+id/goToVideoInsert"
+            app:destination="@id/videoInsertFragment" />
 
     </fragment>
 
