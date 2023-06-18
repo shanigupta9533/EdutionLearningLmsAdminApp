@@ -19,10 +19,6 @@
 
         <import type="android.view.View"/>
 
-        <variable
-            name="fileUrl"
-            type="String" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,116 +68,43 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:background="@drawable/round_upload_section_design"
-                    android:layout_marginTop="@dimen/dp_35"
-                    android:layout_marginStart="@dimen/dimen_20dp"
-                    android:id="@+id/course_image_upload"
-                    android:onClick="@{()->controller.chooseFile()}"
-                    android:layout_marginEnd="@dimen/dimen_30dp"
-                    android:layout_height="@dimen/dp_130">
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:shapeAppearance="@style/Cut"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/video_url"
+                    app:hintTextColor="@color/grey_888888">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/dp_35"
-                        android:layout_height="@dimen/dp_35"
-                        android:layout_marginTop="@dimen/dp_14"
-                        android:alpha="0.5"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_file_upload_icon" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:id="@+id/video_url"
+                        android:textSize="@dimen/dimen_14sp"
+                        android:layout_height="wrap_content" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textView1"
-                        android:text="@string/drag_amp_drop_video"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:fontFamily="@font/gilroy_medium"
-                        android:layout_marginTop="@dimen/dimen_12dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textSize="@dimen/dimen_15sp"
-                        android:textColor="@color/black"
-                        app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-                        app:layout_constraintTop_toTopOf="parent" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dimen_12dp"
-                        android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:shapeAppearance="@style/Cut"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:hint="@string/video_embed_url"
+                    app:hintTextColor="@color/grey_888888">
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:text="@string/or"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_12sp"
-                            android:textColor="@color/black"
-                            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:id="@+id/video_embed_url"
+                        android:textSize="@dimen/dimen_14sp"
+                        android:layout_height="wrap_content" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:text="@string/browser_file"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
-                            android:layout_marginStart="@dimen/dp_3"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_14sp"
-                            android:textColor="@color/quantum_purple500"
-                            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:text="@string/from_device"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:fontFamily="@font/gilroy_medium"
-                            android:layout_marginStart="@dimen/dp_3"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textSize="@dimen/dimen_12sp"
-                            android:textColor="@color/black"
-                            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    app:cardElevation="@dimen/dimen_0dp"
-                    android:layout_marginTop="@dimen/_40ssp"
-                    tools:visibility="visible"
-                    android:visibility="gone"
-                    app:cardCornerRadius="@dimen/dimen_12dp"
-                    android:id="@+id/videoImageParent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/dp_80"
-                        imgUrl="@{fileUrl}"
-                        android:scaleType="centerCrop"
-                        android:layout_height="@dimen/dp_80"
-                        />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/dp_18"
-                        android:layout_height="@dimen/_18ssp"
-                        android:layout_gravity="end"
-                        android:layout_margin="@dimen/dimen_8dp"
-                        android:onClick="@{()->controller.cancelImage()}"
-                        android:src="@drawable/cancel_icon"
-                        />
-
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/submit"

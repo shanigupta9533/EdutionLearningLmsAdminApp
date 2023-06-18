@@ -40,7 +40,7 @@ fun ImageView.setImgUrl(@RawRes @DrawableRes url: Int?, placeholder: Drawable? =
     asyncSrc(url, placeholder)
 }
 
-@BindingAdapter(value = ["videoStatus", "videoFailed"], requireAll = true)
+@BindingAdapter(value = ["videoStatus", "videoFailed"], requireAll = false)
 fun CardView.updateStatus(status: Boolean, failed: Boolean) {
     changeStatus(status, failed)
 }

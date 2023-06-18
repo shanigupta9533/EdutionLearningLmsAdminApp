@@ -38,7 +38,6 @@
                 android:layout_height="5dp"
                 android:layout_marginStart="@dimen/dimen_12dp"
                 videoStatus="@{item.status}"
-                videoFailed="@{item.failed}"
                 app:cardCornerRadius="@dimen/dimen_30dp"
                 app:cardElevation="@dimen/dimen_0dp"
                 app:layout_constraintBottom_toBottomOf="parent"

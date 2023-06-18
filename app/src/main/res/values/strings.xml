@@ -121,4 +121,6 @@
     <string name="search_video_details">Search Video Details</string>
     <string name="video_name">Video Name</string>
     <string name="are_you_sure_you_want_to_delete">Are you sure you want to delete?</string>
+    <string name="video_embed_url">Video Embed Url</string>
+    <string name="video_url">Video Url</string>
 </resources>

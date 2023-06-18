@@ -26,10 +26,12 @@ import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.MESSAGE_TEX
 import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.NOTIFICATION_TITLE
 import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.POST_METHOD
 import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.PROJECT_LINK
+import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.VIDEO_EMBED_URL
 import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.VIDEO_LINK
 import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.VIDEO_LOCATE
 import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.VIDEO_NAME
 import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.VIDEO_UPLOAD_MODULE_KEY
+import com.edutionAdminLearning.edutionLearningAdmin.utils.Constants.VIDEO_URL
 import com.edutionAdminLearning.edutionLearningAdmin.workManager.VIDEO_ID
 import com.edutionAdminLearning.network.utils.FileUploaderService
 import java.io.File
@@ -114,27 +116,12 @@ fun Context.setBannerUploadFile(
 
 }
 
-fun Context.setVideoUploadFile(
-    data: File?,
+fun setVideoUploadFile(
+    videoUrl: String,
+    videoEmbedUrl: String,
     messageText: String,
     fileUploaderService: FileUploaderService,
 ) {
-
-    if (data == null) {
-        toastL(getString(R.string.something_went_wrong))
-        return
-    }
-
-    val fileUrls = data.path
-    if (fileUrls.isNullOrEmpty() || data.length() == 0L) {
-        toastL(getString(R.string.something_went_wrong))
-        return
-    }
-
-    if (!File(fileUrls).exists()) {
-        toastL(getString(R.string.something_went_wront_please_verify_your))
-        return
-    }
 
     val parameterKey = listOf(
         FileUploaderService.MultipartKey(
@@ -142,20 +129,23 @@ fun Context.setVideoUploadFile(
             value = messageText
         ),
 
-    )
+        FileUploaderService.MultipartKey(
+            key = VIDEO_URL,
+            value = videoUrl
+        ),
 
-    val fileArray = listOf(
-        FileUploaderService.MultipartData(
-            key = VIDEO_LOCATE,
-            file = data
-        )
+        FileUploaderService.MultipartKey(
+            key = VIDEO_EMBED_URL,
+            value = videoEmbedUrl
+        ),
+
     )
 
     startUploading(
         uploadId = uniqueId(),
         fileUploaderService = fileUploaderService,
         parameterKey = parameterKey,
-        fileArray = fileArray,
+        fileArray = emptyList(),
         endPointUrl = EndPointUrl.VIDEO_END_POINT.url,
         moduleKey = VIDEO_UPLOAD_MODULE_KEY
     )

@@ -10,25 +10,19 @@ data class VideoDataDto(
     @SerializedName("video_name")
     val videoName:String?=null,
 
-    @SerializedName("video_unique_name")
-    val videoUniqueName: String?=null,
+    @SerializedName("video_url")
+    val videoUrl: String?=null,
 
     @SerializedName("status")
     val status: Boolean?=null,
 
-    @SerializedName("failed")
-    val failed: Boolean?=null,
-
-    @SerializedName("video_locate")
-    val videoLocate:String?=null,
+    @SerializedName("video_embed_url")
+    val videoEmbedUrl:String?=null,
 
     @SerializedName("created_at")
     val createdAt: String?=null,
 
     @SerializedName("updated_at")
     val updatedAt: String?=null,
-
-    @SerializedName("video_data")
-    val videoData: String?=null
 
 )

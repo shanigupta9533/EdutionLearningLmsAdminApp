@@ -13,13 +13,11 @@ class VideoDetailsMapper @Inject constructor(
         return VideoData(
             id = dto?.id.value,
             videoName = dto?.videoName.value,
-            videoUniqueName = dto?.videoUniqueName.value,
+            videoEmbedUrl = dto?.videoEmbedUrl.value,
             status = dto?.status ?: false,
-            videoLocate = dto?.videoLocate.value,
+            videoUrl = dto?.videoUrl.value,
             createdAt = dto?.createdAt.value,
             updatedAt = dto?.updatedAt.value,
-            videoData = dto?.videoData.value,
-            failed = dto?.failed ?: true
         )
     }
 

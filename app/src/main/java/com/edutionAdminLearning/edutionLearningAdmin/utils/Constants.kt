@@ -10,6 +10,8 @@ object Constants {
     const val MESSAGE_TEXT = "messageText"
     const val COURSE_NAME = "course_name"
     const val VIDEO_NAME = "video_name"
+    const val VIDEO_URL = "video_url"
+    const val VIDEO_EMBED_URL = "video_embed_url"
     const val LECTURE_NAME = "lecture_name"
     const val VIDEO_LINK = "video_link"
     const val HOME_WORK_LINK = "home_work_link"

@@ -144,15 +144,13 @@ class VideoDetailsFragment : ViewModelBindingFragment<FragmentVideoDetailsBindin
 
     private fun View.createShowPopup(data: VideoData) = PopupMenu(requireContext(), this).apply {
         menu.add(Menu.NONE, 1, 1, context.getString(R.string.delete))
-
-        if(data.failed)
-            menu.add(Menu.NONE, 2, 2, context.getString(R.string.retry))
+        menu.add(Menu.NONE, 2, 2, context.getString(R.string.edit_details))
 
         setOnMenuItemClickListener {
             when (it.itemId) {
                 1 -> {
                     createDialog(
-                       context = requireContext(),
+                        context = requireContext(),
                         title = context.getString(R.string.delete),
                         message = context.getString(R.string.are_you_sure_you_want_to_delete),
                         posClick = { _, _ ->
@@ -161,8 +159,9 @@ class VideoDetailsFragment : ViewModelBindingFragment<FragmentVideoDetailsBindin
                         negClick = null
                     )
                 }
+
                 2 -> {
-                    viewModel.retryVideos(data.id)
+
                 }
             }
             false
