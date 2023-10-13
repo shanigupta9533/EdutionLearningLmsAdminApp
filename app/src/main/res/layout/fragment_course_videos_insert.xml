@@ -75,7 +75,7 @@
                     android:background="@color/white"
                     android:hint="@string/display_order"
                     app:hintTextColor="@color/grey_888888"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     tools:visibility="visible"
                     app:shapeAppearance="@style/Cut">
 

@@ -29,10 +29,10 @@ android {
             keyPassword "Pw@Test@123"
         }
         edutionRelease {
-            storeFile file("../physicswala.jks")
-            storePassword "physicswala"
-            keyAlias "physicswala"
-            keyPassword "physicswala"
+            storeFile file("../edutionLearning")
+            storePassword "shani@123"
+            keyAlias "key0"
+            keyPassword "shani@123"
         }
     }
 
